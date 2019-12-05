@@ -2,17 +2,18 @@ package com.kodilla.eprojectkfrontend.services;
 
 import com.kodilla.eprojectkfrontend.domains.MotiveDto;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.lang.reflect.Array;
+import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-@Component
+@Service
 public class MotiveService {
 
-    public RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate = new RestTemplate();
 
     public List<MotiveDto> getAllMotive(){
         List<MotiveDto> motiveDtoList = new ArrayList<>();
@@ -21,6 +22,17 @@ public class MotiveService {
         for (int i=0; i<allMotiveList.length; i++){
             motiveDtoList.add(allMotiveList[i]);
         }
+
         return motiveDtoList;
+    }
+
+    public void createMotive (final MotiveDto motiveDto){
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/motive/createMotive")
+                .build().encode().toUri();
+          restTemplate.postForObject(url, motiveDto, MotiveDto.class);
+    }
+
+    public void deleteMotive(final Long motiveID){
+        restTemplate.delete("http://localhost:8080/eprojectk/motive/deleteMotive?motiveID=" + motiveID);
     }
 }
