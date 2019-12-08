@@ -44,8 +44,8 @@ public class LoveCalculatorForm extends FormLayout {
 
         resultGetPercentage.setReadOnly(true);
         tutorialLoveCalculator.setReadOnly(true);
-        tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love?\n" +
-                "Just type their names and find out!\nBe patient! Third party API needs some time to work!");
+        tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love? " +
+                "Just type their names and find out! Be patient! Third party API needs some time to work!");
         tutorialLoveCalculator.setAutofocus(true);
 
         add(tutorialLoveCalculator);

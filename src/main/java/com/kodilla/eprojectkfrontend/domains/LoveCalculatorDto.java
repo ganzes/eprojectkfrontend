@@ -27,7 +27,7 @@ public class LoveCalculatorDto {
         return "So, two lonely people with names: "
                 + fname + '\''
                 +", and " + sname + '\''
-                +" have exactly " + percentage + " percentage at successful shot at love!" + "\n"
+                +" have exactly " + percentage + " percentage at successful shot at love!" + '\''
                 + result;
     }
 }
