@@ -9,8 +9,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-import java.util.List;
-
 @Route
 public class MainView extends VerticalLayout {
 
@@ -24,7 +22,7 @@ public class MainView extends VerticalLayout {
     }
 
     public MainView(){
-        gridMotiveDto.setColumns("motiveID", "motiveText", "motiveAuthor", "motiveRating");
+        gridMotiveDto.setColumns("motiveText", "motiveAuthor", "motiveRating");
         HorizontalLayout mainContent = new HorizontalLayout(gridMotiveDto, motiveForm );
         mainContent.setSizeFull();
         gridMotiveDto.setSizeFull();

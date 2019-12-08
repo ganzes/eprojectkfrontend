@@ -10,9 +10,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
-import java.awt.*;
-import java.awt.print.Book;
-
 public class MotiveForm extends FormLayout {
     private MainView mainView;
 
@@ -22,6 +19,7 @@ public class MotiveForm extends FormLayout {
 
     private Button saveMotive = new Button("Add");
     private Button deleteMotive = new Button("Delete");
+    private Button updateMotive = new Button("Update");
 
     private Binder<MotiveDto> binder = new Binder<>(MotiveDto.class);
 
@@ -32,9 +30,10 @@ public class MotiveForm extends FormLayout {
     public MotiveForm(MainView mainView){
         this.mainView = mainView;
 
-        HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive);
+        HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive, updateMotive);
         saveMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         deleteMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        updateMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         add(motiveText, motiveAuthor, motiveRating, buttons);
 
         binder.bindInstanceFields(this);
@@ -43,6 +42,8 @@ public class MotiveForm extends FormLayout {
 
        saveMotive.addClickListener(event -> saveMotive());
        deleteMotive.addClickListener(event -> deleteMotive());
+       updateMotive.addClickListener(event -> updateMotive());
+
     }
 
     private void saveMotive(){
@@ -55,6 +56,12 @@ public class MotiveForm extends FormLayout {
         MotiveDto motiveDto = binder.getBean();
         motiveService.deleteMotive(motiveDto.getMotiveID());
 
+        mainView.refresh();
+    }
+
+    public void updateMotive(){
+        MotiveDto motiveDto = binder.getBean();
+        motiveService.updateMotive(motiveDto);
         mainView.refresh();
     }
 
