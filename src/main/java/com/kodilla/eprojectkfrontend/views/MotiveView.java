@@ -4,6 +4,7 @@ import com.kodilla.eprojectkfrontend.domains.MotiveDto;
 import com.kodilla.eprojectkfrontend.forms.MotiveForm;
 import com.kodilla.eprojectkfrontend.services.MotiveService;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -14,7 +15,7 @@ public class MotiveView extends VerticalLayout {
 
     private MotiveService motiveService = new MotiveService();
     private Grid<MotiveDto> gridMotiveDto = new Grid<>(MotiveDto.class);
-    private Button goToLoveView = new Button("Go got Love Calculator!");
+    private Button goToLoveView = new Button("Go to Love Calculator!");
     private MotiveForm motiveForm = new MotiveForm(this);
 
     public Grid<MotiveDto> getGridMotiveDto() {
@@ -27,6 +28,7 @@ public class MotiveView extends VerticalLayout {
         mainContent.setSizeFull();
         gridMotiveDto.setSizeFull();
 
+        goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
 
         //gridMotiveDto.setItems(motiveService.getAllMotive());

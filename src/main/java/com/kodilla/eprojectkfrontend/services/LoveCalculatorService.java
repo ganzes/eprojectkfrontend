@@ -13,19 +13,9 @@ public class LoveCalculatorService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public LoveCalculatorDto getPercentage(final LoveCalculatorDto loveCalculatorDto){
-        /*URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/lc" + loveCalculatorDto.getFname() + loveCalculatorDto.getSname())
-                .build().encode().toUri();*/
-
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/lc/?fname=" + loveCalculatorDto.getFname() + "&sname=" + loveCalculatorDto.getSname())
                 .build().encode().toUri();
-
-        // System.out.println("http://localhost:8080/eprojectk/lc/?fname=" + loveCalculatorDto.getFname() + "&sname=" + loveCalculatorDto.getSname());
-
-        //restTemplate.postForObject(url, loveCalculatorDto.getPercentage(), LoveCalculatorDto.class);
         LoveCalculatorDto loveCalculatorDto1 = restTemplate.getForObject(url, LoveCalculatorDto.class);
-
-        System.out.println(loveCalculatorDto1);
-
         return loveCalculatorDto1;
     }
 

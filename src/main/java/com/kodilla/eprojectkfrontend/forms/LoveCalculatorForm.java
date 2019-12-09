@@ -3,11 +3,9 @@ package com.kodilla.eprojectkfrontend.forms;
 import com.kodilla.eprojectkfrontend.domains.LoveCalculatorDto;
 import com.kodilla.eprojectkfrontend.services.LoveCalculatorService;
 import com.kodilla.eprojectkfrontend.views.LoveCalculatorView;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
@@ -59,9 +57,8 @@ public class LoveCalculatorForm extends FormLayout {
 
     public String getPercentage() {
         LoveCalculatorDto loveCalculatorDto = binder.getBean();
-        String result = loveCalculatorService.getPercentage(loveCalculatorDto).toString();
-        loveCalculatorView.refreshLove();
-        return result;
+        //loveCalculatorView.refreshLove();
+        return loveCalculatorService.getPercentage(loveCalculatorDto).toString();
     }
 
     public void setLoveDto(LoveCalculatorDto loveCalculatorDto) {
