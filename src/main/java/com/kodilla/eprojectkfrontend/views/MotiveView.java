@@ -6,6 +6,7 @@ import com.kodilla.eprojectkfrontend.services.MotiveService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -16,7 +17,12 @@ public class MotiveView extends VerticalLayout {
     private MotiveService motiveService = new MotiveService();
     private Grid<MotiveDto> gridMotiveDto = new Grid<>(MotiveDto.class);
     private Button goToLoveView = new Button("Go to Love Calculator!");
+    private Button goToQuoteView = new Button("Go to Quotes!");
+
     private MotiveForm motiveForm = new MotiveForm(this);
+
+    private Label labelMotiveView = new Label("Motives");
+
 
     public Grid<MotiveDto> getGridMotiveDto() {
         return gridMotiveDto;
@@ -31,10 +37,15 @@ public class MotiveView extends VerticalLayout {
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
 
+        goToQuoteView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToQuoteView.addClickListener(event -> goToQuoteView.getUI().ifPresent(ui -> ui.navigate("quotesView")));
+
         //gridMotiveDto.setItems(motiveService.getAllMotive());
         //System.out.println("TUTAJ!!" + motiveService.getAllMotive());
+        add(labelMotiveView);
         add(mainContent);
         add(goToLoveView);
+        add(goToQuoteView);
         setSizeFull();
         refresh();
 

@@ -14,9 +14,10 @@ import com.vaadin.flow.data.binder.Binder;
 public class QuotesForm extends FormLayout {
 
     private QuotesView quotesView;
-    private Button resultTypeKeywordButton= new Button("What are the odds?");
+    private Button resultTypeKeywordButton= new Button("Get your quote with your *Keyword*!");
+    private Button resultRandomQuoteButton = new Button(" Get your random quote for a day!");
 
-    private TextField keywords = new TextField("Type KEYWORD to gain quotes about it! For example: Wisdom");
+    private TextField keywords = new TextField("Type *Keyword* to gain quotes about it! For example: Wisdom.");
 
     private QuotesDto quotesDto = new QuotesDto();
 
@@ -25,13 +26,15 @@ public class QuotesForm extends FormLayout {
     private QuotesService quotesService = new QuotesService();
 
     private TextArea resultTypeKeywordTextAre = new TextArea();
+    private TextArea resultRandomQuoteTextArea = new TextArea();
     private TextArea tutorial = new TextArea();
 
     public QuotesForm(QuotesView quotesView) {
         this.quotesView = quotesView;
 
-        HorizontalLayout buttons = new HorizontalLayout(resultTypeKeywordButton);
+        HorizontalLayout buttons = new HorizontalLayout(resultTypeKeywordButton, resultRandomQuoteButton);
         resultTypeKeywordButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        resultRandomQuoteButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
         add(keywords, buttons);
 
@@ -39,23 +42,30 @@ public class QuotesForm extends FormLayout {
         binder.setBean(quotesDto);
 
         resultTypeKeywordTextAre.setReadOnly(true);
+        resultRandomQuoteTextArea.setReadOnly(true);
 
         tutorial.setReadOnly(true);
         tutorial.setAutofocus(true);
         tutorial.setValue("Get random inspirigin quote for a day or get one with your keyword!");
 
         add(resultTypeKeywordTextAre);
+        add(resultRandomQuoteTextArea);
         add(tutorial);
 
-
         resultTypeKeywordButton.addClickListener(event -> resultTypeKeywordTextAre.setValue(getQuoteByKeyword()));
-
+        resultRandomQuoteButton.addClickListener(event -> resultRandomQuoteTextArea.setValue(getRandomQuote()));
     }
 
 
     public String getQuoteByKeyword(){
         QuotesDto quotesDto = binder.getBean();
         return quotesService.getQuoteByKeyword(quotesDto).toString();
+    }
+
+    public String getRandomQuote(){
+       // QuotesDto quotesDto = binder.getBean();
+        return quotesService.getRandomQuote().toString();
+
     }
 
     public void setQuotesDto(QuotesDto quotesDto) {
