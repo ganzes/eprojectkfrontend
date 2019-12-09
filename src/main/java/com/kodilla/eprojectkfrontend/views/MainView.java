@@ -2,6 +2,7 @@ package com.kodilla.eprojectkfrontend.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -11,6 +12,7 @@ public class MainView extends VerticalLayout {
         private Button goToMotiveView = new Button("Go to Motives!");
         private Button goToLoveView = new Button("Go to Love Calculator!");
         private Button goToQuoteView = new Button("Go to 150000+ Quotes!");
+        private Label mainViewLabel = new Label("Welcome to InspirationVibe");
 
         //private VerticalLayout verticalLayout = new VerticalLayout();
 
@@ -32,7 +34,11 @@ public class MainView extends VerticalLayout {
             goToQuoteView.setAutofocus(true);
             goToQuoteView.addClickListener(event -> goToQuoteView.getUI().ifPresent(ui -> ui.navigate("quotesView")));
 
+            mainViewLabel.setWidthFull();
+
+            add(mainViewLabel);
             add(goToMotiveView, goToLoveView, goToQuoteView);
+
             setSizeFull();
     }
 }

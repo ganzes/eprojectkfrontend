@@ -14,10 +14,10 @@ import com.vaadin.flow.data.binder.Binder;
 public class QuotesForm extends FormLayout {
 
     private QuotesView quotesView;
-    private Button resultTypeKeywordButton= new Button("Get your quote with your *Keyword*!");
-    private Button resultRandomQuoteButton = new Button(" Get your random quote for a day!");
+    private Button resultTypeKeywordButton= new Button("Typed your keyword? Click me.");
+    private Button resultRandomQuoteButton = new Button(" Get random quote!");
 
-    private TextField keywords = new TextField("Type *Keyword* to gain quotes about it! For example: Wisdom.");
+    private TextField keywords = new TextField("Type a specific keyword to search quotes about it. Example: Wisdom.");
 
     private QuotesDto quotesDto = new QuotesDto();
 
@@ -32,6 +32,12 @@ public class QuotesForm extends FormLayout {
     public QuotesForm(QuotesView quotesView) {
         this.quotesView = quotesView;
 
+        tutorial.setReadOnly(true);
+        tutorial.setAutofocus(true);
+        tutorial.setWidthFull();
+        tutorial.setValue("Get some inspiration by either:\n- typing your own keyword,\n- or get one randomly,\n" +
+                "from over +15000 quotes!");
+
         HorizontalLayout buttons = new HorizontalLayout(resultTypeKeywordButton, resultRandomQuoteButton);
         resultTypeKeywordButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         resultRandomQuoteButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
@@ -41,16 +47,16 @@ public class QuotesForm extends FormLayout {
         binder.bindInstanceFields(this);
         binder.setBean(quotesDto);
 
+        resultTypeKeywordTextAre.setErrorMessage("Cannot be empty, or it won't work. Oh, and we honor Capital letters.");
         resultTypeKeywordTextAre.setReadOnly(true);
         resultRandomQuoteTextArea.setReadOnly(true);
 
-        tutorial.setReadOnly(true);
-        tutorial.setAutofocus(true);
-        tutorial.setValue("Get random inspirigin quote for a day or get one with your keyword!");
+
 
         add(resultTypeKeywordTextAre);
         add(resultRandomQuoteTextArea);
         add(tutorial);
+
 
         resultTypeKeywordButton.addClickListener(event -> resultTypeKeywordTextAre.setValue(getQuoteByKeyword()));
         resultRandomQuoteButton.addClickListener(event -> resultRandomQuoteTextArea.setValue(getRandomQuote()));

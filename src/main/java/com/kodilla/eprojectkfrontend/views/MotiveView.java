@@ -40,12 +40,13 @@ public class MotiveView extends VerticalLayout {
         goToQuoteView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToQuoteView.addClickListener(event -> goToQuoteView.getUI().ifPresent(ui -> ui.navigate("quotesView")));
 
+        HorizontalLayout goTos = new HorizontalLayout(goToLoveView, goToQuoteView);
+
         //gridMotiveDto.setItems(motiveService.getAllMotive());
         //System.out.println("TUTAJ!!" + motiveService.getAllMotive());
         add(labelMotiveView);
         add(mainContent);
-        add(goToLoveView);
-        add(goToQuoteView);
+        add(goTos);
         setSizeFull();
         refresh();
 

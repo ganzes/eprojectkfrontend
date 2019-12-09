@@ -31,14 +31,8 @@ public class QuotesDto {
 
     @Override
     public String toString() {
-        return "QuotesDto{" +
-                "message='" + message + '\'' +
-                ", author='" + author + '\'' +
-                ", keywords='" + keywords + '\'' +
-                ", profession='" + profession + '\'' +
-                ", nationality='" + nationality + '\'' +
-                ", authorBirth='" + authorBirth + '\'' +
-                ", authorDeath='" + authorDeath + '\'' +
-                '}';
+        return "'" + message +
+                "'\n\nby: " + author + ";\n\n"
+                + "search similar quotes using those keywords: \n" + keywords+".";
     }
 }

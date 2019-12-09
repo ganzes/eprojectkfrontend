@@ -5,6 +5,7 @@ import com.kodilla.eprojectkfrontend.services.QuotesService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -31,10 +32,11 @@ public class QuotesView extends VerticalLayout {
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
 
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToLoveView);
+
         add(labelQuotesView);
         add(mainQuotesContent);
-        add(goToMotiveView);
-        add(goToLoveView);
+        add(goTos);
         setSizeFull();
     }
 }
