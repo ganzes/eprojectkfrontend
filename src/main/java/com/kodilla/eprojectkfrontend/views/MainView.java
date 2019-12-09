@@ -10,6 +10,7 @@ public class MainView extends VerticalLayout {
 
         private Button goToMotiveView = new Button("Go to Motives!");
         private Button goToLoveView = new Button("Go to Love Calculator!");
+        private Button goToQuoteView = new Button("Go to 150000+ Quotes!");
         //private VerticalLayout verticalLayout = new VerticalLayout();
 
     public MainView(){
@@ -26,7 +27,11 @@ public class MainView extends VerticalLayout {
             goToLoveView.setAutofocus(true);
             goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
 
-            add(goToMotiveView, goToLoveView);
+            goToQuoteView.addThemeVariants(ButtonVariant.LUMO_LARGE);
+            goToQuoteView.setAutofocus(true);
+            goToQuoteView.addClickListener(event -> goToQuoteView.getUI().ifPresent(ui -> ui.navigate("quotesView")));
+
+            add(goToMotiveView, goToLoveView, goToQuoteView);
             setSizeFull();
     }
 }
