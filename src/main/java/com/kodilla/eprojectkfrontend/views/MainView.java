@@ -1,10 +1,7 @@
 package com.kodilla.eprojectkfrontend.views;
 
-import com.kodilla.eprojectkfrontend.forms.LoveCalculatorForm;
-import com.kodilla.eprojectkfrontend.services.LoveCalculatorService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -29,9 +26,7 @@ public class MainView extends VerticalLayout {
             goToLoveView.setAutofocus(true);
             goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
 
-
             add(goToMotiveView, goToLoveView);
             setSizeFull();
-
     }
 }

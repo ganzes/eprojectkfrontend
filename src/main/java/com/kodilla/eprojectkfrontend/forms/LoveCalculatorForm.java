@@ -12,13 +12,13 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
 public class LoveCalculatorForm extends FormLayout {
+
     private LoveCalculatorView loveCalculatorView;
 
     private TextField fname = new TextField("Type first name");
     private TextField sname = new TextField("Type second name");
 
     private Button result = new Button("What are the odds?");
-
 
     private Binder<LoveCalculatorDto> binder = new Binder<>(LoveCalculatorDto.class);
 
@@ -36,24 +36,18 @@ public class LoveCalculatorForm extends FormLayout {
         HorizontalLayout buttons = new HorizontalLayout(result);
         result.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         add(fname, sname, buttons);
-
         binder.bindInstanceFields(this);
         binder.setBean(loveCalculatorDto);
-
         resultGetPercentage.setReadOnly(true);
         tutorialLoveCalculator.setReadOnly(true);
         tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love? " +
                 "Just type their names and find out! Be patient! Third party API needs some time to work!");
         tutorialLoveCalculator.setAutofocus(true);
-
         add(tutorialLoveCalculator);
         add(resultGetPercentage);
-
         //result.addClickListener(event -> Notification.show(getPercentage()));
         result.addClickListener(event -> resultGetPercentage.setValue(getPercentage()));
-
     }
-
 
     public String getPercentage() {
         LoveCalculatorDto loveCalculatorDto = binder.getBean();

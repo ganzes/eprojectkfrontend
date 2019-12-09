@@ -12,14 +12,14 @@ public class LoveCalculatorService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public LoveCalculatorDto getPercentage(final LoveCalculatorDto loveCalculatorDto){
+    public LoveCalculatorDto getPercentage(final LoveCalculatorDto loveCalculatorDto) {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/lc/?fname=" + loveCalculatorDto.getFname() + "&sname=" + loveCalculatorDto.getSname())
                 .build().encode().toUri();
         LoveCalculatorDto loveCalculatorDto1 = restTemplate.getForObject(url, LoveCalculatorDto.class);
         return loveCalculatorDto1;
     }
 
-    public LoveCalculatorDto setLoveNull(){
+    public LoveCalculatorDto setLoveNull() {
         LoveCalculatorDto loveCalculatorDto = new LoveCalculatorDto();
         loveCalculatorDto.setFname(null);
         loveCalculatorDto.setSname(null);

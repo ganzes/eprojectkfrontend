@@ -11,6 +11,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
 public class MotiveForm extends FormLayout {
+
     private MotiveView motiveView;
 
     private TextField motiveText = new TextField("motiveText");
@@ -27,7 +28,7 @@ public class MotiveForm extends FormLayout {
 
     private MotiveDto motiveDto = new MotiveDto();
 
-    public MotiveForm(MotiveView motiveView){
+    public MotiveForm(MotiveView motiveView) {
         this.motiveView = motiveView;
 
         HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive, updateMotive);
@@ -39,27 +40,25 @@ public class MotiveForm extends FormLayout {
         binder.bindInstanceFields(this);
         binder.setBean(motiveDto);
 
-
-       saveMotive.addClickListener(event -> saveMotive());
-       deleteMotive.addClickListener(event -> deleteMotive());
-       updateMotive.addClickListener(event -> updateMotive());
+        saveMotive.addClickListener(event -> saveMotive());
+        deleteMotive.addClickListener(event -> deleteMotive());
+        updateMotive.addClickListener(event -> updateMotive());
 
     }
 
-    private void saveMotive(){
+    private void saveMotive() {
         MotiveDto motiveDto = binder.getBean();
         motiveService.createMotive(motiveDto);
         motiveView.refresh();
     }
 
-    private void deleteMotive(){
+    private void deleteMotive() {
         MotiveDto motiveDto = binder.getBean();
         motiveService.deleteMotive(motiveDto.getMotiveID());
-
         motiveView.refresh();
     }
 
-    public void updateMotive(){
+    public void updateMotive() {
         MotiveDto motiveDto = binder.getBean();
         motiveService.updateMotive(motiveDto);
         motiveView.refresh();

@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MotiveDto {
+
     @JsonProperty("motiveID")
     private Long motiveID;
     @JsonProperty("motiveText")
@@ -21,5 +22,4 @@ public class MotiveDto {
     private String motiveAuthor;
     @JsonProperty("motiveRating")
     private String motiveRating;
-
 }
