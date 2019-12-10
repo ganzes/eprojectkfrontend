@@ -28,30 +28,24 @@ public class LoveCalculatorForm extends FormLayout {
 
     private TextArea resultGetPercentage = new TextArea();
 
-    private TextArea tutorialLoveCalculator = new TextArea();
-
     public LoveCalculatorForm(LoveCalculatorView loveCalculatorView) {
         this.loveCalculatorView = loveCalculatorView;
 
         HorizontalLayout buttons = new HorizontalLayout(result);
         result.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-        add(fname, sname, buttons);
+        add(fname, sname);
         binder.bindInstanceFields(this);
         binder.setBean(loveCalculatorDto);
         resultGetPercentage.setReadOnly(true);
-        tutorialLoveCalculator.setReadOnly(true);
-        tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love? " +
-                "Just type their names and find out! Be patient! Third party API needs some time to work!");
-        tutorialLoveCalculator.setAutofocus(true);
-        add(tutorialLoveCalculator);
+
+        add(result);
         add(resultGetPercentage);
-        //result.addClickListener(event -> Notification.show(getPercentage()));
+
         result.addClickListener(event -> resultGetPercentage.setValue(getPercentage()));
     }
 
     public String getPercentage() {
         LoveCalculatorDto loveCalculatorDto = binder.getBean();
-        //loveCalculatorView.refreshLove();
         return loveCalculatorService.getPercentage(loveCalculatorDto).toString();
     }
 

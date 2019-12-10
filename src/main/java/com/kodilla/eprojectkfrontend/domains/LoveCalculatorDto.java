@@ -25,10 +25,9 @@ public class LoveCalculatorDto {
 
     @Override
     public String toString() {
-        return "So, two lonely people with names: "
-                + fname + '\''
-                +", and " + sname + '\''
-                +" have exactly " + percentage + " percentage at successful shot at love!" + '\''
-                + result;
+        return "So, two lonely people with names:\n'"
+                + fname +"' and '" + sname +"'\n"
+                +"have exactly " + percentage + "% at successful shot at love!\n"
+                + "Final verdict? " + result;
     }
 }

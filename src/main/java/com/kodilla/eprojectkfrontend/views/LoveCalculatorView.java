@@ -7,30 +7,26 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 
 @Route("loveCalculatorView")
 public class LoveCalculatorView extends VerticalLayout {
 
     private LoveCalculatorService loveCalculatorService = new LoveCalculatorService();
-  //  private Grid<LoveCalculatorDto> gridLove = new Grid<>(LoveCalculatorDto.class);
+
     private LoveCalculatorForm loveCalculatorForm = new LoveCalculatorForm(this);
+
     private Button goToMotiveView = new Button("Go to Motives!");
     private Button goToQuoteView = new Button("Go to Quotes!");
 
     private Label labelLoveCalculator = new Label("Love Calculator");
 
-
- /*   public Grid<LoveCalculatorDto> getGridLove() {
-        return gridLove;
-    }*/
+    private TextArea tutorialLoveCalculator = new TextArea();
 
     public LoveCalculatorView(){
-        //gridLove.setColumns("fname", "sname", "percentage", "result");
-
         VerticalLayout mainLoveContent = new VerticalLayout(loveCalculatorForm);
         mainLoveContent.setSizeFull();
-        //gridLove.setSizeFull();
 
         goToMotiveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToMotiveView.addClickListener(event -> goToMotiveView.getUI().ifPresent(ui -> ui.navigate("motiveView")));
@@ -40,19 +36,16 @@ public class LoveCalculatorView extends VerticalLayout {
 
         HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToQuoteView);
 
+        tutorialLoveCalculator.setReadOnly(true);
+        tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love? " +
+        "Just type their names and find out! Be patient! Third party API needs some time to work! Example: John | Kate");
+        tutorialLoveCalculator.setAutofocus(true);
+        tutorialLoveCalculator.setWidthFull();
+
         add(labelLoveCalculator);
         add(mainLoveContent);
+        add(tutorialLoveCalculator);
         add(goTos);
         setSizeFull();
-
-
-
-        // refreshLove();
-        //gridLove.asSingleSelect().addValueChangeListener(event -> loveForm.setLoveDto(gridLove.asSingleSelect().getValue()));
-
     }
-
-/*    public void refreshLove(){
-        gridLove.setItems(loveCalculatorService.setLoveNull());
-    }*/
 }
