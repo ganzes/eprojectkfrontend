@@ -49,13 +49,10 @@ public class MotiveView extends VerticalLayout {
         tutorialMotives.setAutofocus(true);
         tutorialMotives.setWidthFull();
 
-
-        //gridMotiveDto.setItems(motiveService.getAllMotive());
-        //System.out.println("TUTAJ!!" + motiveService.getAllMotive());
-        add(labelMotiveView);
-        add(mainContent);
-        add(tutorialMotives);
         add(goTos);
+        add(labelMotiveView);
+        add(tutorialMotives);
+        add(mainContent);
         setSizeFull();
         refresh();
 

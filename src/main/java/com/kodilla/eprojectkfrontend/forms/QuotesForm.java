@@ -35,7 +35,6 @@ public class QuotesForm extends FormLayout {
     public QuotesForm(QuotesView quotesView) {
         this.quotesView = quotesView;
 
-        VerticalLayout buttons = new VerticalLayout(resultTypeKeywordButton, resultTypeAuthorButton, resultRandomQuoteButton);
         resultTypeKeywordButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         resultRandomQuoteButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         resultTypeAuthorButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
@@ -52,12 +51,14 @@ public class QuotesForm extends FormLayout {
         resultTypeAuthorTextAre.setReadOnly(true);
 
         add(keywords, authors);
-
+        add(resultTypeKeywordButton);
         add(resultTypeKeywordTextAre);
-        add(resultTypeAuthorTextAre);
-        add(resultRandomQuoteTextArea);
 
-        add(buttons);
+        add(resultTypeAuthorButton);
+        add(resultTypeAuthorTextAre);
+
+        add(resultRandomQuoteButton);
+        add(resultRandomQuoteTextArea);
 
         resultTypeKeywordButton.addClickListener(event -> resultTypeKeywordTextAre.setValue(getQuoteByKeyword()));
         resultRandomQuoteButton.addClickListener(event -> resultRandomQuoteTextArea.setValue(getRandomQuote()));
@@ -71,7 +72,6 @@ public class QuotesForm extends FormLayout {
     }
 
     public String getRandomQuote(){
-       // QuotesDto quotesDto = binder.getBean();
         return quotesService.getRandomQuote().toString();
     }
 

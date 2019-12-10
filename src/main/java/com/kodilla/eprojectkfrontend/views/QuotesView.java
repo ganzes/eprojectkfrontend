@@ -13,7 +13,7 @@ import com.vaadin.flow.router.Route;
 @Route("quotesView")
 public class QuotesView extends VerticalLayout {
 
-    private QuotesService quotesService = new QuotesService();
+   // private QuotesService quotesService = new QuotesService();
     private QuotesForm quotesForm = new QuotesForm(this);
 
     private Button goToMotiveView = new Button("Go to Motives!");
@@ -42,10 +42,12 @@ public class QuotesView extends VerticalLayout {
         tutorial.setValue("Get some inspiration for today from over +15000 quotes, by either:\n- typing your own 'Keyword', - 'Author's name, " +
                 "- or get one randomly.");
 
-        add(labelQuotesView);
-        add(mainQuotesContent);
-        add(tutorial);
         add(goTos);
+        add(labelQuotesView);
+        add(tutorial);
+
+        add(mainQuotesContent);
+
         setSizeFull();
     }
 }

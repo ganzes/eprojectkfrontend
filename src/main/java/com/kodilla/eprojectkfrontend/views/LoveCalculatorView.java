@@ -38,14 +38,15 @@ public class LoveCalculatorView extends VerticalLayout {
 
         tutorialLoveCalculator.setReadOnly(true);
         tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love? " +
-        "Just type their names and find out! Be patient! Third party API needs some time to work! Example: John | Kate");
+        "Just type their names and find out! Be patient! Third party API needs some time to work!\nExample: 'John' | 'Kate'");
         tutorialLoveCalculator.setAutofocus(true);
         tutorialLoveCalculator.setWidthFull();
 
-        add(labelLoveCalculator);
-        add(mainLoveContent);
-        add(tutorialLoveCalculator);
         add(goTos);
+        add(labelLoveCalculator);
+        add(tutorialLoveCalculator);
+        add(mainLoveContent);
+
         setSizeFull();
     }
 }
