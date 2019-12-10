@@ -15,14 +15,12 @@ import com.vaadin.flow.data.binder.Binder;
 public class QuotesForm extends FormLayout {
 
     private QuotesView quotesView;
-    private Button resultTypeKeywordButton= new Button("Typed your keyword? Click me.");
+    private Button resultTypeKeywordButton= new Button("Typed your 'Keyword'? Click me.");
     private Button resultRandomQuoteButton = new Button(" Get random quote!");
-    private Button resultTypeAuthorButton= new Button("Typed your Author? Click me.");
-
+    private Button resultTypeAuthorButton= new Button("Typed your 'Author'? Click me.");
 
     private TextField keywords = new TextField("Type a specific keyword to search quotes about it. Example: Wisdom.");
     private TextField authors = new TextField("Type a name to search quotes from him/her. Example: Erich von Stroheim.");
-
 
     private QuotesDto quotesDto = new QuotesDto();
 
@@ -34,38 +32,32 @@ public class QuotesForm extends FormLayout {
     private TextArea resultRandomQuoteTextArea = new TextArea();
     private TextArea resultTypeAuthorTextAre = new TextArea();
 
-    private TextArea tutorial = new TextArea();
-
     public QuotesForm(QuotesView quotesView) {
         this.quotesView = quotesView;
 
-        tutorial.setReadOnly(true);
-        tutorial.setAutofocus(true);
-        tutorial.setWidthFull();
-        tutorial.setValue("Get some inspiration by either:\n- typing your own keyword,\n- or get one randomly,\n" +
-                "from over +15000 quotes!");
-
-        VerticalLayout buttons = new VerticalLayout(resultTypeKeywordButton, resultRandomQuoteButton, resultTypeAuthorButton);
+        VerticalLayout buttons = new VerticalLayout(resultTypeKeywordButton, resultTypeAuthorButton, resultRandomQuoteButton);
         resultTypeKeywordButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         resultRandomQuoteButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         resultTypeAuthorButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-
-
-        add(keywords, authors, buttons);
 
         binder.bindInstanceFields(this);
         binder.setBean(quotesDto);
 
         resultTypeKeywordTextAre.setErrorMessage("Cannot be empty, or it won't work. Oh, and we honor Capital letters.");
+        resultTypeAuthorTextAre.setLabel("Result based on the author's name:");
         resultTypeKeywordTextAre.setReadOnly(true);
+        resultTypeKeywordTextAre.setLabel("Result based upon your 'keywords:");
         resultRandomQuoteTextArea.setReadOnly(true);
+        resultRandomQuoteTextArea.setLabel("Random quote:");
         resultTypeAuthorTextAre.setReadOnly(true);
 
-        add(resultTypeKeywordTextAre);
-        add(resultRandomQuoteTextArea);
-        add(resultTypeAuthorTextAre);
-        add(tutorial);
+        add(keywords, authors);
 
+        add(resultTypeKeywordTextAre);
+        add(resultTypeAuthorTextAre);
+        add(resultRandomQuoteTextArea);
+
+        add(buttons);
 
         resultTypeKeywordButton.addClickListener(event -> resultTypeKeywordTextAre.setValue(getQuoteByKeyword()));
         resultRandomQuoteButton.addClickListener(event -> resultRandomQuoteTextArea.setValue(getRandomQuote()));

@@ -46,7 +46,6 @@ public class QuotesService {
         quotesDto.setAuthorBirth(null);
         quotesDto.setAuthorDeath(null);
 
-
         return quotesDto;
     }
 

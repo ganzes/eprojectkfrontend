@@ -7,6 +7,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 
 @Route("quotesView")
@@ -20,6 +21,7 @@ public class QuotesView extends VerticalLayout {
 
     private Label labelQuotesView = new Label("Quotes");
 
+    private TextArea tutorial = new TextArea();
 
     public QuotesView(){
 
@@ -34,8 +36,15 @@ public class QuotesView extends VerticalLayout {
 
         HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToLoveView);
 
+        tutorial.setReadOnly(true);
+        tutorial.setAutofocus(true);
+        tutorial.setWidthFull();
+        tutorial.setValue("Get some inspiration for today from over +15000 quotes, by either:\n- typing your own 'Keyword', - 'Author's name, " +
+                "- or get one randomly.");
+
         add(labelQuotesView);
         add(mainQuotesContent);
+        add(tutorial);
         add(goTos);
         setSizeFull();
     }
