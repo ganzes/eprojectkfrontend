@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,4 +24,6 @@ public class MotiveDto {
     private String motiveAuthor;
     @JsonProperty("motiveRating")
     private String motiveRating;
+    @JsonProperty("motiveCreated")
+    private LocalDate motiveCreated;
 }

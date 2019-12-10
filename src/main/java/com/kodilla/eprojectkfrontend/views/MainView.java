@@ -41,11 +41,11 @@ public class MainView extends VerticalLayout {
             mainViewLabel.setWidthFull();
 
             vaadinIcon.setColor("blue");
-            vaadinIcon.setSize("200px");
+            vaadinIcon.setSize("66px");
 
             add(mainViewLabel);
-            add(goToMotiveView, goToLoveView, goToQuoteView);
-            add(vaadinIcon);
+            add(goToMotiveView, goToLoveView, goToQuoteView,vaadinIcon);
+
 
             setSizeFull();
     }

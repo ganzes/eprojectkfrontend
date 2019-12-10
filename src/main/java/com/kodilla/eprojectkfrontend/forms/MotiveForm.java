@@ -14,9 +14,9 @@ public class MotiveForm extends FormLayout {
 
     private MotiveView motiveView;
 
-    private TextField motiveText = new TextField("motiveText");
-    private TextField motiveAuthor = new TextField("motiveAuthor");
-    private TextField motiveRating = new TextField("motiveRating");
+    private TextField motiveText = new TextField("Text");
+    private TextField motiveAuthor = new TextField("Author");
+    private TextField motiveRating = new TextField("Rating");
 
     private Button saveMotive = new Button("Add");
     private Button deleteMotive = new Button("Delete");
