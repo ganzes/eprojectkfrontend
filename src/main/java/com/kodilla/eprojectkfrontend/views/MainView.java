@@ -44,7 +44,7 @@ public class MainView extends VerticalLayout {
             vaadinIcon.setSize("66px");
 
             add(mainViewLabel);
-            add(goToMotiveView, goToLoveView, goToQuoteView,vaadinIcon);
+            add(goToMotiveView, goToLoveView, goToQuoteView, vaadinIcon);
 
 
             setSizeFull();

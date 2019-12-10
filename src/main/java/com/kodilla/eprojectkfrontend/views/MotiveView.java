@@ -9,6 +9,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 
 @Route("motiveView")
@@ -23,6 +24,7 @@ public class MotiveView extends VerticalLayout {
 
     private Label labelMotiveView = new Label("Motives");
 
+    private TextArea tutorialMotives = new TextArea();
 
     public Grid<MotiveDto> getGridMotiveDto() {
         return gridMotiveDto;
@@ -42,10 +44,17 @@ public class MotiveView extends VerticalLayout {
 
         HorizontalLayout goTos = new HorizontalLayout(goToLoveView, goToQuoteView);
 
+        tutorialMotives.setReadOnly(true);
+        tutorialMotives.setValue("Add motivational quotes from your favourite authors, and rate them!");
+        tutorialMotives.setAutofocus(true);
+        tutorialMotives.setWidthFull();
+
+
         //gridMotiveDto.setItems(motiveService.getAllMotive());
         //System.out.println("TUTAJ!!" + motiveService.getAllMotive());
         add(labelMotiveView);
         add(mainContent);
+        add(tutorialMotives);
         add(goTos);
         setSizeFull();
         refresh();
