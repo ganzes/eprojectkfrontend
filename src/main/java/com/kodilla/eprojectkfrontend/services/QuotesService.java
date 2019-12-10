@@ -29,6 +29,13 @@ public class QuotesService {
         return quotesDto1;
     }
 
+    public QuotesDto getQuoteByAuthor(final QuotesDto quotesDto){
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/byAuthor?author=" + quotesDto.getAuthor())
+                .build().encode().toUri();
+        QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
+        return quotesDto1;
+    }
+
     public QuotesDto setQuotesNull() {
         QuotesDto quotesDto = new QuotesDto();
         quotesDto.setMessage(null);
