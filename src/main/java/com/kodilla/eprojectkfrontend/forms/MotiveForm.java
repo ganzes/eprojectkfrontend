@@ -21,6 +21,7 @@ public class MotiveForm extends FormLayout {
     private Button saveMotive = new Button("Add");
     private Button deleteMotive = new Button("Delete");
     private Button updateMotive = new Button("Update");
+    private Button deleteAllMotives = new Button("Delete All");
 
     private Binder<MotiveDto> binder = new Binder<>(MotiveDto.class);
 
@@ -31,10 +32,11 @@ public class MotiveForm extends FormLayout {
     public MotiveForm(MotiveView motiveView) {
         this.motiveView = motiveView;
 
-        HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive, updateMotive);
+        HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive, updateMotive, deleteAllMotives);
         saveMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         deleteMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         updateMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        deleteAllMotives.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         add(motiveText, motiveAuthor, motiveRating, buttons);
 
         binder.bindInstanceFields(this);
@@ -43,7 +45,7 @@ public class MotiveForm extends FormLayout {
         saveMotive.addClickListener(event -> saveMotive());
         deleteMotive.addClickListener(event -> deleteMotive());
         updateMotive.addClickListener(event -> updateMotive());
-
+        deleteAllMotives.addClickListener(event -> deleteAllMotives());
     }
 
     private void saveMotive() {
@@ -55,6 +57,11 @@ public class MotiveForm extends FormLayout {
     private void deleteMotive() {
         MotiveDto motiveDto = binder.getBean();
         motiveService.deleteMotive(motiveDto.getMotiveID());
+        motiveView.refresh();
+    }
+
+    private void deleteAllMotives() {
+        motiveService.deleteAllMotives();
         motiveView.refresh();
     }
 

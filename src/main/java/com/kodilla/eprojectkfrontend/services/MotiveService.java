@@ -39,4 +39,8 @@ public class MotiveService {
     public void updateMotive(final MotiveDto motiveDto) {
         restTemplate.put("http://localhost:8080/eprojectk/motive/updateMotive", motiveDto, MotiveDto.class);
     }
+
+    public void deleteAllMotives() {
+        restTemplate.delete("http://localhost:8080/eprojectk/motive/deleteAllMotives");
+    }
 }

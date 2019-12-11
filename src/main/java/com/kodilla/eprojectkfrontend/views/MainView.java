@@ -17,13 +17,7 @@ public class MainView extends VerticalLayout {
         private Label mainViewLabel = new Label("Welcome to InspirationVibe");
         private Icon vaadinIcon = new Icon(VaadinIcon.VAADIN_V);
 
-
-        //private VerticalLayout verticalLayout = new VerticalLayout();
-
     public MainView(){
-
-            //verticalLayout.add(goToLoveView, goToMotiveView);
-            //verticalLayout.setAlignItems(Alignment.CENTER);
 
             setAlignItems(Alignment.CENTER);
             goToMotiveView.addThemeVariants(ButtonVariant.LUMO_LARGE);
@@ -45,7 +39,6 @@ public class MainView extends VerticalLayout {
 
             add(mainViewLabel);
             add(goToMotiveView, goToLoveView, goToQuoteView, vaadinIcon);
-
 
             setSizeFull();
     }
