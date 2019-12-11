@@ -1,6 +1,5 @@
 package com.kodilla.eprojectkfrontend.services;
 
-import com.kodilla.eprojectkfrontend.domains.LoveCalculatorDto;
 import com.kodilla.eprojectkfrontend.domains.QuotesDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,9 +17,20 @@ public class QuotesService {
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/?keyword=" + quotesDto.getKeywords())
                 .build().encode().toUri();
         QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
+
+        System.out.println("TTTTTTTTTTTTTTTT  " + quotesDto.getKeywords());
         return quotesDto1;
     }
 
+    public QuotesDto getQuoteByAuthor(final QuotesDto quotesDto){
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/byAuthor?author=" + quotesDto.getAuthor())
+                .build().encode().toUri();
+
+        System.out.println("TTTTTTTTTTTTTTTT  " + quotesDto.getAuthor());
+
+        QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
+        return quotesDto1;
+    }
 
     public QuotesDto getRandomQuote(){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/getRandom")
@@ -29,14 +39,9 @@ public class QuotesService {
         return quotesDto1;
     }
 
-    public QuotesDto getQuoteByAuthor(final QuotesDto quotesDto){
-        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/byAuthor?author=" + quotesDto.getAuthor())
-                .build().encode().toUri();
-        QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
-        return quotesDto1;
-    }
 
-    public QuotesDto setQuotesNull() {
+
+/*    public QuotesDto setQuotesNull() {
         QuotesDto quotesDto = new QuotesDto();
         quotesDto.setMessage(null);
         quotesDto.setAuthor(null);
@@ -47,6 +52,6 @@ public class QuotesService {
         quotesDto.setAuthorDeath(null);
 
         return quotesDto;
-    }
+    }*/
 
 }

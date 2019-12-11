@@ -32,7 +32,7 @@ public class QuotesDto {
     @Override
     public String toString() {
         return "'" + message +
-                "'\n\nby: " + author + ";\n\n"
+                "'\nby: " + author + ";\n"
                 + "search similar quotes using those keywords: \n" + keywords+".";
     }
 }

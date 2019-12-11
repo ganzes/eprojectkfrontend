@@ -6,8 +6,6 @@ import com.kodilla.eprojectkfrontend.views.QuotesView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -20,7 +18,7 @@ public class QuotesForm extends FormLayout {
     private Button resultTypeAuthorButton= new Button("Typed your 'Author'? Click me.");
 
     private TextField keywords = new TextField("Type a specific keyword to search quotes about it. Example: Wisdom.");
-    private TextField authors = new TextField("Type a name to search quotes from him/her. Example: Erich von Stroheim.");
+    private TextField author = new TextField("Type a name to search quotes from him/her. Example: Erich von Stroheim.");
 
     private QuotesDto quotesDto = new QuotesDto();
 
@@ -29,8 +27,9 @@ public class QuotesForm extends FormLayout {
     private QuotesService quotesService = new QuotesService();
 
     private TextArea resultTypeKeywordTextAre = new TextArea();
-    private TextArea resultRandomQuoteTextArea = new TextArea();
     private TextArea resultTypeAuthorTextAre = new TextArea();
+    private TextArea resultRandomQuoteTextArea = new TextArea();
+
 
     public QuotesForm(QuotesView quotesView) {
         this.quotesView = quotesView;
@@ -42,15 +41,19 @@ public class QuotesForm extends FormLayout {
         binder.bindInstanceFields(this);
         binder.setBean(quotesDto);
 
+/*
         resultTypeKeywordTextAre.setErrorMessage("Cannot be empty, or it won't work. Oh, and we honor Capital letters.");
+*/
         resultTypeAuthorTextAre.setLabel("Result based on the author's name:");
-        resultTypeKeywordTextAre.setReadOnly(true);
-        resultTypeKeywordTextAre.setLabel("Result based upon your 'keywords:");
-        resultRandomQuoteTextArea.setReadOnly(true);
-        resultRandomQuoteTextArea.setLabel("Random quote:");
         resultTypeAuthorTextAre.setReadOnly(true);
 
-        add(keywords, authors);
+        resultTypeKeywordTextAre.setLabel("Result based upon your 'keywords:");
+        resultTypeKeywordTextAre.setReadOnly(true);
+
+        resultRandomQuoteTextArea.setLabel("Random quote:");
+        resultRandomQuoteTextArea.setReadOnly(true);
+
+        add(keywords, author);
         add(resultTypeKeywordButton);
         add(resultTypeKeywordTextAre);
 
@@ -71,13 +74,13 @@ public class QuotesForm extends FormLayout {
         return quotesService.getQuoteByKeyword(quotesDto).toString();
     }
 
-    public String getRandomQuote(){
-        return quotesService.getRandomQuote().toString();
-    }
-
     public String getQuoteByAuthor(){
         QuotesDto quotesDto = binder.getBean();
         return quotesService.getQuoteByAuthor(quotesDto).toString();
+    }
+
+    public String getRandomQuote(){
+        return quotesService.getRandomQuote().toString();
     }
 
     public void setQuotesDto(QuotesDto quotesDto) {
