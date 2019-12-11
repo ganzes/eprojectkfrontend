@@ -31,6 +31,12 @@ public class QuotesDto {
 
     @Override
     public String toString() {
+
+        if (keywords == null){
+            return "'" + message +
+                    "'\nby: " + author + ".";
+        }
+
         return "'" + message +
                 "'\nby: " + author + ";\n"
                 + "search similar quotes using those keywords: \n" + keywords+".";

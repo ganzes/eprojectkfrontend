@@ -16,17 +16,14 @@ public class QuotesService {
     public QuotesDto getQuoteByKeyword(final QuotesDto quotesDto){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/?keyword=" + quotesDto.getKeywords())
                 .build().encode().toUri();
-        QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
 
-        System.out.println("TTTTTTTTTTTTTTTT  " + quotesDto.getKeywords());
+        QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
         return quotesDto1;
     }
 
     public QuotesDto getQuoteByAuthor(final QuotesDto quotesDto){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/byAuthor?author=" + quotesDto.getAuthor())
                 .build().encode().toUri();
-
-        System.out.println("TTTTTTTTTTTTTTTT  " + quotesDto.getAuthor());
 
         QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
         return quotesDto1;
