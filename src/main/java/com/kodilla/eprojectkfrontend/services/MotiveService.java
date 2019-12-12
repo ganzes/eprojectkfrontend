@@ -59,7 +59,7 @@ public class MotiveService {
     public List<MotiveDto> findMotiveByRating(final String motiveRating){
         List<MotiveDto> motiveDtoList = new ArrayList<>();
 
-        MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive//getMotiveByRating?motiveRating=" + motiveRating, MotiveDto[].class);
+        MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotiveByRating?motiveRating=" + motiveRating, MotiveDto[].class);
 
         for (int i = 0; i < allMotiveList.length; i++) {
             motiveDtoList.add(allMotiveList[i]);
@@ -68,4 +68,14 @@ public class MotiveService {
         return motiveDtoList;
     }
 
+    public List<MotiveDto> getMotivesFacade() {
+        List<MotiveDto> motiveDtoList = new ArrayList<>();
+        MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotivesFacade", MotiveDto[].class);
+
+        for (int i = 0; i < allMotiveList.length; i++) {
+            motiveDtoList.add(allMotiveList[i]);
+        }
+
+        return motiveDtoList;
+    }
 }

@@ -72,7 +72,7 @@ public class MotiveForm extends FormLayout {
 
     private void deleteAllMotives() {
         motiveService.deleteAllMotives();
-        motiveView.refresh();
+        motiveView.refreshFacade();
     }
 
     public void updateMotive() {
