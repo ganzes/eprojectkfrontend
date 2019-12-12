@@ -43,4 +43,17 @@ public class MotiveService {
     public void deleteAllMotives() {
         restTemplate.delete("http://localhost:8080/eprojectk/motive/deleteAllMotives");
     }
+
+    public List<MotiveDto> findMotiveByAuthor(final String author){
+        List<MotiveDto> motiveDtoList = new ArrayList<>();
+
+        MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotiveByAuthor?motiveAuthor=" + author, MotiveDto[].class);
+
+        for (int i = 0; i < allMotiveList.length; i++) {
+            motiveDtoList.add(allMotiveList[i]);
+        }
+
+        return motiveDtoList;
+    }
+
 }

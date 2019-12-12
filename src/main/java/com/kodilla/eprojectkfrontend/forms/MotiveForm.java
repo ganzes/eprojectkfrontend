@@ -22,6 +22,7 @@ public class MotiveForm extends FormLayout {
     private Button deleteMotive = new Button("Delete");
     private Button updateMotive = new Button("Update");
     private Button deleteAllMotives = new Button("Delete All");
+    private Button findMotiveByAuthor = new Button("Find by Author");
 
     private Binder<MotiveDto> binder = new Binder<>(MotiveDto.class);
 
@@ -33,11 +34,14 @@ public class MotiveForm extends FormLayout {
         this.motiveView = motiveView;
 
         HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive, updateMotive, deleteAllMotives);
+        HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMotiveByAuthor);
+
         saveMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         deleteMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         updateMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         deleteAllMotives.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        add(motiveText, motiveAuthor, motiveRating, buttons);
+        findMotiveByAuthor.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        add(motiveText, motiveAuthor, motiveRating, buttons, buttonsSecondRow);
 
         binder.bindInstanceFields(this);
         binder.setBean(motiveDto);
@@ -46,6 +50,8 @@ public class MotiveForm extends FormLayout {
         deleteMotive.addClickListener(event -> deleteMotive());
         updateMotive.addClickListener(event -> updateMotive());
         deleteAllMotives.addClickListener(event -> deleteAllMotives());
+
+        findMotiveByAuthor.addClickListener(event -> findMotiveByAuthor());
     }
 
     private void saveMotive() {
@@ -69,6 +75,12 @@ public class MotiveForm extends FormLayout {
         MotiveDto motiveDto = binder.getBean();
         motiveService.updateMotive(motiveDto);
         motiveView.refresh();
+    }
+
+    public void findMotiveByAuthor(){
+        String motiveDto = binder.getBean().getMotiveAuthor();
+        motiveService.findMotiveByAuthor(motiveDto);
+        motiveView.refreshByAllAuthors(motiveDto);
     }
 
     public void setMotiveDto(MotiveDto motiveDto) {

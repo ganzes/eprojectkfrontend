@@ -63,4 +63,7 @@ public class MotiveView extends VerticalLayout {
         gridMotiveDto.setItems(motiveService.getAllMotive());
     }
 
+    public void refreshByAllAuthors(String author){
+        gridMotiveDto.setItems(motiveService.findMotiveByAuthor(author));
+    }
 }
