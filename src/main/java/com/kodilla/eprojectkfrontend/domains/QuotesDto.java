@@ -38,7 +38,7 @@ public class QuotesDto {
         }
 
         return "'" + message +
-                "'\nby: " + author + ";\n"
+                "'\n" + author + "\n"
                 + "search similar quotes using those keywords: \n" + keywords+".";
     }
 }

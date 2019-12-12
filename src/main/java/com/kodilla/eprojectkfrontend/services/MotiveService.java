@@ -56,4 +56,16 @@ public class MotiveService {
         return motiveDtoList;
     }
 
+    public List<MotiveDto> findMotiveByRating(final String motiveRating){
+        List<MotiveDto> motiveDtoList = new ArrayList<>();
+
+        MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive//getMotiveByRating?motiveRating=" + motiveRating, MotiveDto[].class);
+
+        for (int i = 0; i < allMotiveList.length; i++) {
+            motiveDtoList.add(allMotiveList[i]);
+        }
+
+        return motiveDtoList;
+    }
+
 }

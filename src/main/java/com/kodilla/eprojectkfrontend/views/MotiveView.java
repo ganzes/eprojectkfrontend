@@ -85,4 +85,8 @@ public class MotiveView extends VerticalLayout {
     public void refreshByAllAuthors(String author){
         gridSearchResult.setItems(motiveService.findMotiveByAuthor(author));
     }
+
+    public void refreshByAllRatings(String motiveRating){
+        gridSearchResult.setItems(motiveService.findMotiveByRating(motiveRating));
+    }
 }

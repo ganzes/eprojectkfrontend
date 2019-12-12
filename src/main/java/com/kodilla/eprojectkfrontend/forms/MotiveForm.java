@@ -23,6 +23,8 @@ public class MotiveForm extends FormLayout {
     private Button updateMotive = new Button("Update");
     private Button deleteAllMotives = new Button("Delete All");
     private Button findMotiveByAuthor = new Button("Find by Author");
+    private Button findMotiveByRating = new Button("Find by Rating");
+
 
     private Binder<MotiveDto> binder = new Binder<>(MotiveDto.class);
 
@@ -34,13 +36,14 @@ public class MotiveForm extends FormLayout {
         this.motiveView = motiveView;
 
         HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive, updateMotive, deleteAllMotives);
-        HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMotiveByAuthor);
+        HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMotiveByAuthor, findMotiveByRating);
 
-        saveMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        deleteMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        updateMotive.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        deleteAllMotives.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        findMotiveByAuthor.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        saveMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        deleteMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        updateMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        deleteAllMotives.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        findMotiveByAuthor.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        findMotiveByRating.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         add(motiveText, motiveAuthor, motiveRating, buttons, buttonsSecondRow);
 
         binder.bindInstanceFields(this);
@@ -52,6 +55,7 @@ public class MotiveForm extends FormLayout {
         deleteAllMotives.addClickListener(event -> deleteAllMotives());
 
         findMotiveByAuthor.addClickListener(event -> findMotiveByAuthor());
+        findMotiveByRating.addClickListener(event -> findMotiveByRating());
     }
 
     private void saveMotive() {
@@ -81,6 +85,12 @@ public class MotiveForm extends FormLayout {
         String motiveDto = binder.getBean().getMotiveAuthor();
         motiveService.findMotiveByAuthor(motiveDto);
         motiveView.refreshByAllAuthors(motiveDto);
+    }
+
+    public void findMotiveByRating(){
+        String motiveDto = binder.getBean().getMotiveRating();
+        motiveService.findMotiveByRating(motiveDto);
+        motiveView.refreshByAllRatings(motiveDto);
     }
 
     public void setMotiveDto(MotiveDto motiveDto) {
