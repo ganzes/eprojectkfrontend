@@ -21,6 +21,7 @@ public class MotiveView extends VerticalLayout {
 
     private Button goToLoveView = new Button("Go to Love Calculator!");
     private Button goToQuoteView = new Button("Go to Quotes!");
+    private Button goToBookView = new Button("Go to Books!");
 
     private MotiveForm motiveForm = new MotiveForm(this);
 
@@ -56,10 +57,13 @@ public class MotiveView extends VerticalLayout {
         goToQuoteView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToQuoteView.addClickListener(event -> goToQuoteView.getUI().ifPresent(ui -> ui.navigate("quotesView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToLoveView, goToQuoteView);
+        goToBookView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToBookView.addClickListener(event -> goToBookView.getUI().ifPresent(ui -> ui.navigate("bookView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToLoveView, goToQuoteView, goToBookView);
 
         tutorialMotives.setReadOnly(true);
-        tutorialMotives.setValue("Add motivational quotes from your favourite authors, and rate them!");
+        tutorialMotives.setValue("Add motivational quotes from your favourite authors, and rate them!  When in doubt, refresh page!");
         tutorialMotives.setAutofocus(true);
         tutorialMotives.setWidthFull();
 
