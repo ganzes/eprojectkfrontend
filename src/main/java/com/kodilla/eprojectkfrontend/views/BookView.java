@@ -62,7 +62,7 @@ public class BookView extends VerticalLayout {
         goToMotiveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToMotiveView.addClickListener(event -> goToMotiveView.getUI().ifPresent(ui -> ui.navigate("motiveView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToLoveView, goToQuoteView, goToMotiveView);
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToLoveView, goToQuoteView);
 
         tutorialBooks.setReadOnly(true);
         tutorialBooks.setValue("Add your favourite books, and rate them! When in doubt, refresh page!");

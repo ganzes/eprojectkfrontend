@@ -60,7 +60,7 @@ public class MotiveView extends VerticalLayout {
         goToBookView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToBookView.addClickListener(event -> goToBookView.getUI().ifPresent(ui -> ui.navigate("bookView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToLoveView, goToQuoteView, goToBookView);
+        HorizontalLayout goTos = new HorizontalLayout(goToBookView, goToLoveView, goToQuoteView);
 
         tutorialMotives.setReadOnly(true);
         tutorialMotives.setValue("Add motivational quotes from your favourite authors, and rate them!  When in doubt, refresh page!");

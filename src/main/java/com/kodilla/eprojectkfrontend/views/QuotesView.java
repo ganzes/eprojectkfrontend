@@ -13,11 +13,11 @@ import com.vaadin.flow.router.Route;
 @Route("quotesView")
 public class QuotesView extends VerticalLayout {
 
-   // private QuotesService quotesService = new QuotesService();
     private QuotesForm quotesForm = new QuotesForm(this);
 
     private Button goToMotiveView = new Button("Go to Motives!");
     private Button goToLoveView = new Button("Go to Love Calculator!");
+    private Button goToBookView = new Button("Go to Books!");
 
     private Label labelQuotesView = new Label("Quotes");
 
@@ -34,7 +34,10 @@ public class QuotesView extends VerticalLayout {
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToLoveView);
+        goToBookView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToBookView.addClickListener(event -> goToBookView.getUI().ifPresent(ui -> ui.navigate("bookView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToLoveView);
 
         tutorial.setReadOnly(true);
         tutorial.setAutofocus(true);
