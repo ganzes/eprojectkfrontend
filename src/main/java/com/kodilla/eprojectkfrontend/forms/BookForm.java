@@ -22,8 +22,8 @@ public class BookForm  extends FormLayout {
     private Button deleteBook = new Button("Delete");
     private Button updateBook = new Button("Update");
     private Button deleteAllBooks = new Button("Delete All");
-    private Button findBookByAuthor = new Button("Find by Author");
-    private Button findBookByRating = new Button("Find by Rating");
+    private Button findBookByAuthor = new Button("Find By Author");
+    private Button findBookByRating = new Button("Find By Rating");
 
 
     private Binder<BookDto> binder = new Binder<>(BookDto.class);
@@ -39,7 +39,7 @@ public class BookForm  extends FormLayout {
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findBookByAuthor, findBookByRating);
 
         saveBook.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-        deleteBook.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        deleteBook.addThemeVariants(ButtonVariant.LUMO_ERROR);
         updateBook.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         deleteAllBooks.addThemeVariants(ButtonVariant.LUMO_ERROR);
         findBookByAuthor.addThemeVariants(ButtonVariant.LUMO_CONTRAST);

@@ -1,8 +1,10 @@
 package com.kodilla.eprojectkfrontend.forms;
 
+import com.kodilla.eprojectkfrontend.factory.ButtonFactory;
 import com.kodilla.eprojectkfrontend.views.MotiveView;
 import com.kodilla.eprojectkfrontend.domains.MotiveDto;
 import com.kodilla.eprojectkfrontend.services.MotiveService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -14,17 +16,19 @@ public class MotiveForm extends FormLayout {
 
     private MotiveView motiveView;
 
+    private ButtonFactory buttonFactory = new ButtonFactory();
+
     private TextField motiveText = new TextField("Text");
     private TextField motiveAuthor = new TextField("Author");
     private TextField motiveRating = new TextField("Rating");
 
-    private Button saveMotive = new Button("Add");
+   // private Button saveMotive = new Button("Add");
     private Button deleteMotive = new Button("Delete");
     private Button updateMotive = new Button("Update");
     private Button deleteAllMotives = new Button("Delete All");
     private Button findMotiveByAuthor = new Button("Find by Author");
     private Button findMotiveByRating = new Button("Find by Rating");
-
+    private Button buttonFactoryAdd = buttonFactory.buttonFactory("Add", "Add");
 
     private Binder<MotiveDto> binder = new Binder<>(MotiveDto.class);
 
@@ -35,11 +39,11 @@ public class MotiveForm extends FormLayout {
     public MotiveForm(MotiveView motiveView) {
         this.motiveView = motiveView;
 
-        HorizontalLayout buttons = new HorizontalLayout(saveMotive, deleteMotive, updateMotive, deleteAllMotives);
+        HorizontalLayout buttons = new HorizontalLayout(buttonFactoryAdd, deleteMotive, updateMotive, deleteAllMotives);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMotiveByAuthor, findMotiveByRating);
 
-        saveMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-        deleteMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        //saveMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        deleteMotive.addThemeVariants(ButtonVariant.LUMO_ERROR);
         updateMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         deleteAllMotives.addThemeVariants(ButtonVariant.LUMO_ERROR);
         findMotiveByAuthor.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
@@ -49,13 +53,17 @@ public class MotiveForm extends FormLayout {
         binder.bindInstanceFields(this);
         binder.setBean(motiveDto);
 
-        saveMotive.addClickListener(event -> saveMotive());
+        buttonFactoryAdd.addClickListener(event -> saveMotive());
         deleteMotive.addClickListener(event -> deleteMotive());
         updateMotive.addClickListener(event -> updateMotive());
         deleteAllMotives.addClickListener(event -> deleteAllMotives());
-
         findMotiveByAuthor.addClickListener(event -> findMotiveByAuthor());
         findMotiveByRating.addClickListener(event -> findMotiveByRating());
+
+        //saveMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
+        deleteMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
+        updateMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
+        deleteAllMotives.addClickListener(event -> UI.getCurrent().getPage().reload());
     }
 
     private void saveMotive() {
