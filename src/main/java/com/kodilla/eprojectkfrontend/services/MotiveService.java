@@ -78,4 +78,9 @@ public class MotiveService {
 
         return motiveDtoList;
     }
+
+    public  Long countAllMotives() throws NullPointerException {
+        long allMotives = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/countAllMotives", Long.class);
+        return allMotives;
+    }
 }
