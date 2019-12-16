@@ -12,7 +12,7 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
-public class BookForm  extends FormLayout {
+public class BookForm extends FormLayout {
 
     private BookView bookView;
 
@@ -21,7 +21,6 @@ public class BookForm  extends FormLayout {
     private TextField bookRating = new TextField("Rating");
 
     private NumberField countAllBooksNumberField = new NumberField("Books size");
-
 
     private Button saveBook = new Button("Add");
     private Button deleteBook = new Button("Delete");
@@ -94,19 +93,19 @@ public class BookForm  extends FormLayout {
         bookView.refresh();
     }
 
-    public void findBookByAuthor(){
+    public void findBookByAuthor() {
         String bookDto = binder.getBean().getBookAuthor();
         bookService.findBookByAuthor(bookDto);
         bookView.refreshByAllAuthors(bookDto);
     }
 
-    public void findBookByRating(){
+    public void findBookByRating() {
         String bookDto = binder.getBean().getBookRating();
         bookService.findBookByRating(bookDto);
         bookView.refreshByAllRatings(bookDto);
     }
 
-    public double countAllBooks(){
+    public double countAllBooks() {
         return bookService.countAllBooks();
     }
 
