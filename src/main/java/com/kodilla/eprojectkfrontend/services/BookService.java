@@ -66,4 +66,9 @@ public class BookService {
 
         return bookDtoList;
     }
+
+    public  Long countAllBooks() throws NullPointerException {
+        long allBook = restTemplate.getForObject("http://localhost:8080/eprojectk/book/countAllBooks", Long.class);
+        return allBook;
+    }
 }

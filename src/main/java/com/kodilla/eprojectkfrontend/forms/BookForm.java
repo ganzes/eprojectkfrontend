@@ -3,10 +3,12 @@ package com.kodilla.eprojectkfrontend.forms;
 import com.kodilla.eprojectkfrontend.domains.BookDto;
 import com.kodilla.eprojectkfrontend.services.BookService;
 import com.kodilla.eprojectkfrontend.views.BookView;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
@@ -18,13 +20,16 @@ public class BookForm  extends FormLayout {
     private TextField bookAuthor = new TextField("Author");
     private TextField bookRating = new TextField("Rating");
 
+    private NumberField countAllBooksNumberField = new NumberField("Books size");
+
+
     private Button saveBook = new Button("Add");
     private Button deleteBook = new Button("Delete");
     private Button updateBook = new Button("Update");
     private Button deleteAllBooks = new Button("Delete All");
     private Button findBookByAuthor = new Button("Find By Author");
     private Button findBookByRating = new Button("Find By Rating");
-
+    private Button buttonCountAllBooks = new Button("Check stored books size");
 
     private Binder<BookDto> binder = new Binder<>(BookDto.class);
 
@@ -36,7 +41,7 @@ public class BookForm  extends FormLayout {
         this.bookView = bookView;
 
         HorizontalLayout buttons = new HorizontalLayout(saveBook, deleteBook, updateBook, deleteAllBooks);
-        HorizontalLayout buttonsSecondRow = new HorizontalLayout(findBookByAuthor, findBookByRating);
+        HorizontalLayout buttonsSecondRow = new HorizontalLayout(findBookByAuthor, findBookByRating, buttonCountAllBooks);
 
         saveBook.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         deleteBook.addThemeVariants(ButtonVariant.LUMO_ERROR);
@@ -45,6 +50,9 @@ public class BookForm  extends FormLayout {
         findBookByAuthor.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         findBookByRating.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         add(bookTitle, bookAuthor, bookRating, buttons, buttonsSecondRow);
+
+        countAllBooksNumberField.setReadOnly(true);
+        add(countAllBooksNumberField);
 
         binder.bindInstanceFields(this);
         binder.setBean(bookDto);
@@ -56,6 +64,11 @@ public class BookForm  extends FormLayout {
 
         findBookByAuthor.addClickListener(event -> findBookByAuthor());
         findBookByRating.addClickListener(event -> findBookByRating());
+        buttonCountAllBooks.addClickListener(event -> countAllBooksNumberField.setValue(countAllBooks()));
+
+        deleteBook.addClickListener(event -> UI.getCurrent().getPage().reload());
+        updateBook.addClickListener(event -> UI.getCurrent().getPage().reload());
+        deleteAllBooks.addClickListener(event -> UI.getCurrent().getPage().reload());
     }
 
     private void saveBook() {
@@ -91,6 +104,10 @@ public class BookForm  extends FormLayout {
         String bookDto = binder.getBean().getBookRating();
         bookService.findBookByRating(bookDto);
         bookView.refreshByAllRatings(bookDto);
+    }
+
+    public double countAllBooks(){
+        return bookService.countAllBooks();
     }
 
     public void setBookDto(BookDto bookDto) {
