@@ -2,7 +2,6 @@ package com.kodilla.eprojectkfrontend.views;
 
 import com.kodilla.eprojectkfrontend.domains.BookDto;
 import com.kodilla.eprojectkfrontend.forms.BookForm;
-import com.kodilla.eprojectkfrontend.forms.BookForm;
 import com.kodilla.eprojectkfrontend.services.BookService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -24,6 +23,7 @@ public class BookView extends VerticalLayout {
     private Button goToQuoteView = new Button("Go to Quotes!");
     private Button goToMotiveView = new Button("Go to Motives!");
     private Button goToMovieView = new Button("Go to Movies!");
+    private Button goToGameView = new Button("Go to Games!");
 
     private BookForm bookForm = new BookForm(this);
 
@@ -65,7 +65,10 @@ public class BookView extends VerticalLayout {
         goToMovieView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToMovieView.addClickListener(event -> goToMovieView.getUI().ifPresent(ui -> ui.navigate("movieView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToMovieView, goToLoveView, goToQuoteView);
+        goToGameView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToGameView.addClickListener(event -> goToGameView.getUI().ifPresent(ui -> ui.navigate("gameView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToMovieView, goToGameView, goToLoveView, goToQuoteView);
 
         tutorialBooks.setReadOnly(true);
         tutorialBooks.setValue("Add your favourite books, and rate them! When in doubt, refresh page!");

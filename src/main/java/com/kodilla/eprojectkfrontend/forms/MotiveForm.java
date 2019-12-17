@@ -71,6 +71,7 @@ public class MotiveForm extends FormLayout {
         buttonCountAllMotives.addClickListener(event -> countAllMotivesNumberField.setValue(countAllMotives()));
 
         //saveMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
+        buttonFactoryAdd.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
         updateMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteAllMotives.addClickListener(event -> UI.getCurrent().getPage().reload());

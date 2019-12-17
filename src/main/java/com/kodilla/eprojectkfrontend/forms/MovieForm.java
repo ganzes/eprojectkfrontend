@@ -65,6 +65,7 @@ public class MovieForm extends FormLayout {
         findMovieByRating.addClickListener(event -> findMovieByRating());
         buttonCountAllMovies.addClickListener(event -> countAllMoviesNumberField.setValue(countAllMovies()));
 
+        saveMovie.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteMovie.addClickListener(event -> UI.getCurrent().getPage().reload());
         updateMovie.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteAllMovies.addClickListener(event -> UI.getCurrent().getPage().reload());

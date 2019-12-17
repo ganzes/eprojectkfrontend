@@ -65,6 +65,7 @@ public class BookForm extends FormLayout {
         findBookByRating.addClickListener(event -> findBookByRating());
         buttonCountAllBooks.addClickListener(event -> countAllBooksNumberField.setValue(countAllBooks()));
 
+        saveBook.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteBook.addClickListener(event -> UI.getCurrent().getPage().reload());
         updateBook.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteAllBooks.addClickListener(event -> UI.getCurrent().getPage().reload());

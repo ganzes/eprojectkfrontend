@@ -19,6 +19,7 @@ public class QuotesView extends VerticalLayout {
     private Button goToLoveView = new Button("Go to Love Calculator!");
     private Button goToBookView = new Button("Go to Books!");
     private Button goToMovieView = new Button("Go to Movies!");
+    private Button goToGameView = new Button("Go to Games!");
 
 
     private Label labelQuotesView = new Label("Quotes");
@@ -42,7 +43,10 @@ public class QuotesView extends VerticalLayout {
         goToMovieView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToMovieView.addClickListener(event -> goToMovieView.getUI().ifPresent(ui -> ui.navigate("movieView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView, goToLoveView);
+        goToGameView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToGameView.addClickListener(event -> goToGameView.getUI().ifPresent(ui -> ui.navigate("gameView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView, goToGameView, goToLoveView);
 
         tutorial.setReadOnly(true);
         tutorial.setAutofocus(true);
