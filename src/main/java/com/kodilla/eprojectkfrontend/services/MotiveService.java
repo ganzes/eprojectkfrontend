@@ -3,6 +3,7 @@ package com.kodilla.eprojectkfrontend.services;
 import com.kodilla.eprojectkfrontend.domains.MotiveDto;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,7 +16,7 @@ public class MotiveService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public List<MotiveDto> getAllMotive() {
+    public List<MotiveDto> getAllMotive() throws HttpServerErrorException {
         List<MotiveDto> motiveDtoList = new ArrayList<>();
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotives", MotiveDto[].class);
 
@@ -26,17 +27,17 @@ public class MotiveService {
         return motiveDtoList;
     }
 
-    public void createMotive(final MotiveDto motiveDto) {
+    public void createMotive(final MotiveDto motiveDto) throws HttpServerErrorException {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/motive/createMotive")
                 .build().encode().toUri();
         restTemplate.postForObject(url, motiveDto, MotiveDto.class);
     }
 
-    public void deleteMotive(final Long motiveID) {
+    public void deleteMotive(final Long motiveID) throws HttpServerErrorException {
         restTemplate.delete("http://localhost:8080/eprojectk/motive/deleteMotive?motiveID=" + motiveID);
     }
 
-    public void updateMotive(final MotiveDto motiveDto) {
+    public void updateMotive(final MotiveDto motiveDto) throws HttpServerErrorException {
         restTemplate.put("http://localhost:8080/eprojectk/motive/updateMotive", motiveDto, MotiveDto.class);
     }
 
@@ -44,7 +45,7 @@ public class MotiveService {
         restTemplate.delete("http://localhost:8080/eprojectk/motive/deleteAllMotives");
     }
 
-    public List<MotiveDto> findMotiveByAuthor(final String author){
+    public List<MotiveDto> findMotiveByAuthor(final String author) throws HttpServerErrorException {
         List<MotiveDto> motiveDtoList = new ArrayList<>();
 
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotiveByAuthor?motiveAuthor=" + author, MotiveDto[].class);
@@ -56,7 +57,7 @@ public class MotiveService {
         return motiveDtoList;
     }
 
-    public List<MotiveDto> findMotiveByRating(final String motiveRating){
+    public List<MotiveDto> findMotiveByRating(final String motiveRating) throws HttpServerErrorException {
         List<MotiveDto> motiveDtoList = new ArrayList<>();
 
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotiveByRating?motiveRating=" + motiveRating, MotiveDto[].class);
@@ -68,7 +69,7 @@ public class MotiveService {
         return motiveDtoList;
     }
 
-    public List<MotiveDto> getMotivesFacade() {
+    public List<MotiveDto> getMotivesFacade() throws HttpServerErrorException {
         List<MotiveDto> motiveDtoList = new ArrayList<>();
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotivesFacade", MotiveDto[].class);
 
@@ -79,7 +80,7 @@ public class MotiveService {
         return motiveDtoList;
     }
 
-    public  Long countAllMotives() throws NullPointerException {
+    public Long countAllMotives() throws NullPointerException {
         long allMotives = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/countAllMotives", Long.class);
         return allMotives;
     }

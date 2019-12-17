@@ -2,6 +2,7 @@ package com.kodilla.eprojectkfrontend.services;
 
 import com.kodilla.eprojectkfrontend.domains.BookDto;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -14,7 +15,7 @@ public class BookService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public List<BookDto> getAllBook() {
+    public List<BookDto> getAllBook() throws HttpServerErrorException {
         List<BookDto> bookDtoList = new ArrayList<>();
         BookDto[] allBookList = restTemplate.getForObject("http://localhost:8080/eprojectk/book/getBooks", BookDto[].class);
 
@@ -25,25 +26,25 @@ public class BookService {
         return bookDtoList;
     }
 
-    public void createBook(final BookDto bookDto) {
+    public void createBook(final BookDto bookDto) throws HttpServerErrorException {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/book/createBook")
                 .build().encode().toUri();
         restTemplate.postForObject(url, bookDto, BookDto.class);
     }
 
-    public void deleteBook(final Long bookID) {
+    public void deleteBook(final Long bookID) throws HttpServerErrorException {
         restTemplate.delete("http://localhost:8080/eprojectk/book/deleteBook?bookID=" + bookID);
     }
 
-    public void updateBook(final BookDto bookDto) {
+    public void updateBook(final BookDto bookDto) throws HttpServerErrorException {
         restTemplate.put("http://localhost:8080/eprojectk/book/updateBook", bookDto, BookDto.class);
     }
 
-    public void deleteAllBooks() {
+    public void deleteAllBooks() throws HttpServerErrorException {
         restTemplate.delete("http://localhost:8080/eprojectk/book/deleteAllBooks");
     }
 
-    public List<BookDto> findBookByAuthor(final String author){
+    public List<BookDto> findBookByAuthor(final String author) throws HttpServerErrorException {
         List<BookDto> bookDtoList = new ArrayList<>();
 
         BookDto[] allBookList = restTemplate.getForObject("http://localhost:8080/eprojectk/book/getBookByAuthor?bookAuthor=" + author, BookDto[].class);
@@ -55,7 +56,7 @@ public class BookService {
         return bookDtoList;
     }
 
-    public List<BookDto> findBookByRating(final String bookRating){
+    public List<BookDto> findBookByRating(final String bookRating) throws HttpServerErrorException {
         List<BookDto> bookDtoList = new ArrayList<>();
 
         BookDto[] allBookList = restTemplate.getForObject("http://localhost:8080/eprojectk/book/getBookByRating?bookRating=" + bookRating, BookDto[].class);
@@ -67,7 +68,7 @@ public class BookService {
         return bookDtoList;
     }
 
-    public  Long countAllBooks() throws NullPointerException {
+    public Long countAllBooks() throws NullPointerException {
         long allBook = restTemplate.getForObject("http://localhost:8080/eprojectk/book/countAllBooks", Long.class);
         return allBook;
     }
