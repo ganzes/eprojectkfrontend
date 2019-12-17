@@ -15,6 +15,8 @@ public class MainView extends VerticalLayout {
         private Button goToLoveView = new Button("Go to Love Calculator!");
         private Button goToQuoteView = new Button("Go to 150000+ Quotes!");
         private Button goToBookView = new Button("Go to Books!");
+        private Button goToMovieView = new Button("Go to Movies!");
+
 
         private Label mainViewLabel = new Label("Welcome to InspirationVibe");
         private Icon vaadinIcon = new Icon(VaadinIcon.VAADIN_V);
@@ -38,7 +40,9 @@ public class MainView extends VerticalLayout {
             goToBookView.setAutofocus(true);
             goToBookView.addClickListener(event -> goToBookView.getUI().ifPresent(ui -> ui.navigate("bookView")));
 
-
+            goToMovieView.addThemeVariants(ButtonVariant.LUMO_LARGE);
+            goToMovieView.setAutofocus(true);
+            goToMovieView.addClickListener(event -> goToMovieView.getUI().ifPresent(ui -> ui.navigate("movieView")));
 
 
             mainViewLabel.setWidthFull();
@@ -47,7 +51,7 @@ public class MainView extends VerticalLayout {
             vaadinIcon.setSize("66px");
 
             add(mainViewLabel);
-            add(goToMotiveView, goToBookView, goToLoveView, goToQuoteView, vaadinIcon);
+            add(goToMotiveView, goToBookView, goToMovieView, goToLoveView, goToQuoteView, vaadinIcon);
 
             setSizeFull();
     }

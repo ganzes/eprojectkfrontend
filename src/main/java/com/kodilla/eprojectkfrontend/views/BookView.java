@@ -23,7 +23,7 @@ public class BookView extends VerticalLayout {
     private Button goToLoveView = new Button("Go to Love Calculator!");
     private Button goToQuoteView = new Button("Go to Quotes!");
     private Button goToMotiveView = new Button("Go to Motives!");
-
+    private Button goToMovieView = new Button("Go to Movies!");
 
     private BookForm bookForm = new BookForm(this);
 
@@ -62,7 +62,10 @@ public class BookView extends VerticalLayout {
         goToMotiveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToMotiveView.addClickListener(event -> goToMotiveView.getUI().ifPresent(ui -> ui.navigate("motiveView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToLoveView, goToQuoteView);
+        goToMovieView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToMovieView.addClickListener(event -> goToMovieView.getUI().ifPresent(ui -> ui.navigate("movieView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToMovieView, goToLoveView, goToQuoteView);
 
         tutorialBooks.setReadOnly(true);
         tutorialBooks.setValue("Add your favourite books, and rate them! When in doubt, refresh page!");

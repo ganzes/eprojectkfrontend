@@ -1,8 +1,6 @@
 package com.kodilla.eprojectkfrontend.services;
 
 import com.kodilla.eprojectkfrontend.domains.LoveCalculatorDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,9 +22,6 @@ public class LoveCalculatorService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    @Autowired
-    private RestTemplateBuilder restTemplate1;
-
     public LoveCalculatorDto getPercentage(final LoveCalculatorDto loveCalculatorDto) throws HttpServerErrorException {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/lc/?fname=" + loveCalculatorDto.getFname() + "&sname=" + loveCalculatorDto.getSname())
                 .build().encode().toUri();
@@ -40,16 +35,15 @@ public class LoveCalculatorService {
         restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory("http://localhost:8080"));
         restTemplate.getForObject("/eprojectk/lc/export-LoveCalculatorResults", String.class);
 
-    }*/
-
-/*    public void exportCSV(){     // This method will download file using RestTemplate
+    }
+    public void downloadFile(){     // This method will download file using RestTemplate
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
             HttpEntity<String> entity = new HttpEntity<>(headers);
-            ResponseEntity<byte[]> response = restTemplate1.build()
-                    .exchange("http://localhost:8080/eprojectk/lc/getResults", HttpMethod.GET, entity, byte[].class);
-            Files.write(Paths.get("c:\\download-files\\demo1.pdf"), response.getBody());
+            ResponseEntity<byte[]> response = restTemplate.build()
+                    .exchange("http://localhost:8080/downloadFile", HttpMethod.GET, entity, byte[].class);
+            Files.write(Paths.get("e:\\download-files\\demo1.pdf"), response.getBody());
         }catch (Exception e){
             e.printStackTrace();
         }
