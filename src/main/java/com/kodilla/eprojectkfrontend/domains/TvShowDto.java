@@ -14,20 +14,20 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MotiveDto {
+public class TvShowDto {
 
-    @JsonProperty("motiveID")
-    private Long motiveID;
-
-    @JsonProperty("motiveText")
-    private String motiveText;
-
-    @JsonProperty("motiveAuthor")
-    private String motiveAuthor;
-
-    @JsonProperty("motiveRating")
-    private String motiveRating;
-
-    @JsonProperty("motiveCreated")
-    private LocalDate motiveCreated;
+    @JsonProperty("tvShowID")
+    private long tvShowID;
+    
+    @JsonProperty("tvShowTitle")
+    private String tvShowTitle;
+    
+    @JsonProperty("tvShowCategory")
+    private String tvShowCategory;
+    
+    @JsonProperty("tvShowRating")
+    private String tvShowRating;
+    
+    @JsonProperty("tvShowCreated")
+    private LocalDate tvShowCreated;
 }

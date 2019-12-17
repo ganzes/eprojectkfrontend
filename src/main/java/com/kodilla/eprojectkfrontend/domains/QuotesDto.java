@@ -16,16 +16,22 @@ public class QuotesDto {
 
     @JsonProperty("message")
     private String message;
+
     @JsonProperty("author")
     private String author;
+
     @JsonProperty("keywords")
     private String keywords;
+
     @JsonProperty("profession")
     private String profession;
+
     @JsonProperty("nationality")
     private String nationality;
+
     @JsonProperty("authorBirth")
     private String authorBirth;
+
     @JsonProperty("authorDeath")
     private String authorDeath;
 

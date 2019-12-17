@@ -18,12 +18,16 @@ public class MovieDto {
 
     @JsonProperty("movieID")
     private long movieID;
+
     @JsonProperty("movieTitle")
     private String movieTitle;
+
     @JsonProperty("movieDirector")
     private String movieDirector;
+
     @JsonProperty("movieRating")
     private String movieRating;
+
     @JsonProperty("movieCreated")
     private LocalDate movieCreated;
 

@@ -24,6 +24,7 @@ public class MovieView extends VerticalLayout {
     private Button goToMotiveView = new Button("Go to Motives!");
     private Button goToBookView = new Button("Go to Books!");
     private Button goToGameView = new Button("Go to Games!");
+    private Button goToTvShowView = new Button("Go to TV Shows!");
 
     private MovieForm movieForm = new MovieForm(this);
 
@@ -68,7 +69,11 @@ public class MovieView extends VerticalLayout {
         goToGameView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToGameView.addClickListener(event -> goToGameView.getUI().ifPresent(ui -> ui.navigate("gameView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToGameView, goToLoveView, goToQuoteView);
+        goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToGameView,
+                goToTvShowView, goToLoveView, goToQuoteView);
 
         tutorialMovies.setReadOnly(true);
         tutorialMovies.setValue("Add your favourite movies, and rate them! When in doubt, refresh page!");

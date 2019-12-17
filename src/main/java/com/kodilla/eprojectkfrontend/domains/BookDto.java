@@ -18,13 +18,16 @@ public class BookDto {
 
     @JsonProperty("bookID")
     private long bookID;
+
     @JsonProperty("bookTitle")
     private String bookTitle;
+
     @JsonProperty("bookAuthor")
     private String bookAuthor;
+
     @JsonProperty("bookRating")
     private String bookRating;
+
     @JsonProperty("bookCreated")
     private LocalDate bookCreated;
-
 }

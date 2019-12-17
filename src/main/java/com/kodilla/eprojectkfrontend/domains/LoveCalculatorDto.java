@@ -16,10 +16,13 @@ public class LoveCalculatorDto {
 
     @JsonProperty("fname")
     private String fname;
+
     @JsonProperty("sname")
     private String sname;
+
     @JsonProperty("percentage")
     private String percentage;
+
     @JsonProperty("result")
     private String result;
 

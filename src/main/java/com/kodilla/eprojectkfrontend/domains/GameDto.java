@@ -18,12 +18,16 @@ public class GameDto {
 
     @JsonProperty("gameID")
     private long gameID;
+
     @JsonProperty("gameTitle")
     private String gameTitle;
+
     @JsonProperty("gameDeveloper")
     private String gameDeveloper;
+
     @JsonProperty("gameRating")
     private String gameRating;
+
     @JsonProperty("gameCreated")
     private LocalDate gameCreated;
 

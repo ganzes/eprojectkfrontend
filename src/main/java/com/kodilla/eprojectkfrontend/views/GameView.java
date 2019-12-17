@@ -24,6 +24,7 @@ public class GameView extends VerticalLayout {
     private Button goToMotiveView = new Button("Go to Motives!");
     private Button goToMovieView = new Button("Go to Movies!");
     private Button goToBookView = new Button("Go to Books!");
+    private Button goToTvShowView = new Button("Go to TV Shows!");
 
     private GameForm gameForm = new GameForm(this);
 
@@ -68,7 +69,11 @@ public class GameView extends VerticalLayout {
         goToBookView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToBookView.addClickListener(event -> goToBookView.getUI().ifPresent(ui -> ui.navigate("bookView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView, goToLoveView, goToQuoteView);
+        goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
+                goToTvShowView, goToLoveView, goToQuoteView);
 
         tutorialGames.setReadOnly(true);
         tutorialGames.setValue("Add your favourite games, and rate them! When in doubt, refresh page!");
@@ -87,7 +92,6 @@ public class GameView extends VerticalLayout {
 
         gridGameDto.asSingleSelect().addValueChangeListener(event -> gameForm.setGameDto(gridGameDto.asSingleSelect().getValue()));
         gridSearchResult.asSingleSelect().addValueChangeListener(event -> gameForm.setGameDto(gridSearchResult.asSingleSelect().getValue()));
-
     }
 
     public void refresh(){

@@ -22,6 +22,7 @@ public class LoveCalculatorView extends VerticalLayout {
     private Button goToBookView = new Button("Go to Books!");
     private Button goToMovieView = new Button("Go to Movies!");
     private Button goToGameView = new Button("Go to Games!");
+    private Button goToTvShowView = new Button("Go to TV Shows!");
 
     private Label labelLoveCalculator = new Label("Love Calculator");
 
@@ -46,7 +47,11 @@ public class LoveCalculatorView extends VerticalLayout {
         goToGameView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToGameView.addClickListener(event -> goToGameView.getUI().ifPresent(ui -> ui.navigate("gameView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView, goToGameView, goToQuoteView);
+        goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
+        goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
+                goToTvShowView, goToGameView, goToQuoteView);
 
         tutorialLoveCalculator.setReadOnly(true);
         tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love? " +
