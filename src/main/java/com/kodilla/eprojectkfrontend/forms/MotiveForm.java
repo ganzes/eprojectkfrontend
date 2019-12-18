@@ -53,7 +53,7 @@ public class MotiveForm extends FormLayout {
         deleteAllMotives.addThemeVariants(ButtonVariant.LUMO_ERROR);
         findMotiveByAuthor.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         findMotiveByRating.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-        buttonCountAllMotives.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        //buttonCountAllMotives.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         add(motiveText, motiveAuthor, motiveRating, buttons, buttonsSecondRow);
 
         countAllMotivesNumberField.setReadOnly(true);

@@ -39,6 +39,9 @@ public class TvShowForm extends FormLayout {
     public TvShowForm(TvShowView tvShowView) {
         this.tvShowView = tvShowView;
 
+        binder.bindInstanceFields(this);
+        binder.setBean(tvShowDto);
+
         HorizontalLayout buttons = new HorizontalLayout(saveTvShow, deleteTvShow, updateTvShow, deleteAllTvShows);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findTvShowByCategory, findTvShowByRating, buttonCountAllTvShows);
 
@@ -48,13 +51,8 @@ public class TvShowForm extends FormLayout {
         deleteAllTvShows.addThemeVariants(ButtonVariant.LUMO_ERROR);
         findTvShowByCategory.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         findTvShowByRating.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-        add(tvShowTitle, tvShowCategory, tvShowRating, buttons, buttonsSecondRow);
 
         countAllTvShowsNumberField.setReadOnly(true);
-        add(countAllTvShowsNumberField);
-
-        binder.bindInstanceFields(this);
-        binder.setBean(tvShowDto);
 
         saveTvShow.addClickListener(event -> saveTvShow());
         deleteTvShow.addClickListener(event -> deleteTvShow());
@@ -69,6 +67,9 @@ public class TvShowForm extends FormLayout {
         deleteTvShow.addClickListener(event -> UI.getCurrent().getPage().reload());
         updateTvShow.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteAllTvShows.addClickListener(event -> UI.getCurrent().getPage().reload());
+
+        add(tvShowTitle, tvShowCategory, tvShowRating, buttons, buttonsSecondRow);
+        add(countAllTvShowsNumberField);
     }
 
     private void saveTvShow() {

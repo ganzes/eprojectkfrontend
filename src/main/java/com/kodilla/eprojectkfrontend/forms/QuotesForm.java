@@ -13,9 +13,9 @@ import com.vaadin.flow.data.binder.Binder;
 public class QuotesForm extends FormLayout {
 
     private QuotesView quotesView;
-    private Button resultTypeKeywordButton= new Button("Typed your 'Keyword'? Click me.");
+    private Button resultTypeKeywordButton = new Button("Typed your 'Keyword'? Click me.");
     private Button resultRandomQuoteButton = new Button(" Get random quote!");
-    private Button resultTypeAuthorButton= new Button("Typed your 'Author'? Click me.");
+    private Button resultTypeAuthorButton = new Button("Typed your 'Author'? Click me.");
 
     private TextField keywords = new TextField("Type a specific keyword to search quotes about it. Example: Wisdom.");
     private TextField author = new TextField("Type a name to search quotes from him/her. Example: Erich von Stroheim.");
@@ -26,64 +26,58 @@ public class QuotesForm extends FormLayout {
 
     private QuotesService quotesService = new QuotesService();
 
-    private TextArea resultTypeKeywordTextAre = new TextArea();
-    private TextArea resultTypeAuthorTextAre = new TextArea();
+    private TextArea resultTypeKeywordTextArea = new TextArea();
+    private TextArea resultTypeAuthorTextArea = new TextArea();
     private TextArea resultRandomQuoteTextArea = new TextArea();
-
 
     public QuotesForm(QuotesView quotesView) {
         this.quotesView = quotesView;
+
+        binder.bindInstanceFields(this);
+        binder.setBean(quotesDto);
 
         resultTypeKeywordButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         resultRandomQuoteButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         resultTypeAuthorButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
-        binder.bindInstanceFields(this);
-        binder.setBean(quotesDto);
+        resultTypeAuthorTextArea.setLabel("Result based on the author's name:");
+        resultTypeAuthorTextArea.setReadOnly(true);
 
-/*
-        resultTypeKeywordTextAre.setErrorMessage("Cannot be empty, or it won't work. Oh, and we honor Capital letters.");
-*/
-        resultTypeAuthorTextAre.setLabel("Result based on the author's name:");
-        resultTypeAuthorTextAre.setReadOnly(true);
-
-        resultTypeKeywordTextAre.setLabel("Result based upon your 'keywords:");
-        resultTypeKeywordTextAre.setReadOnly(true);
+        resultTypeKeywordTextArea.setLabel("Result based upon your 'keywords:");
+        resultTypeKeywordTextArea.setReadOnly(true);
 
         resultRandomQuoteTextArea.setLabel("Random quote:");
         resultRandomQuoteTextArea.setReadOnly(true);
 
+        resultTypeKeywordButton.addClickListener(event -> resultTypeKeywordTextArea.setValue(getQuoteByKeyword()));
+        resultRandomQuoteButton.addClickListener(event -> resultRandomQuoteTextArea.setValue(getRandomQuote()));
+        resultTypeAuthorButton.addClickListener(event -> resultTypeAuthorTextArea.setValue(getQuoteByAuthor()));
+
         add(keywords, author);
         add(resultTypeKeywordButton);
-        add(resultTypeKeywordTextAre);
-
+        add(resultTypeKeywordTextArea);
         add(resultTypeAuthorButton);
-        add(resultTypeAuthorTextAre);
-
+        add(resultTypeAuthorTextArea);
         add(resultRandomQuoteButton);
         add(resultRandomQuoteTextArea);
-
-        resultTypeKeywordButton.addClickListener(event -> resultTypeKeywordTextAre.setValue(getQuoteByKeyword()));
-        resultRandomQuoteButton.addClickListener(event -> resultRandomQuoteTextArea.setValue(getRandomQuote()));
-        resultTypeAuthorButton.addClickListener(event -> resultTypeAuthorTextAre.setValue(getQuoteByAuthor()));
     }
 
-
-    public String getQuoteByKeyword(){
+    public String getQuoteByKeyword() {
         QuotesDto quotesDto = binder.getBean();
         return quotesService.getQuoteByKeyword(quotesDto).toString();
     }
 
-    public String getQuoteByAuthor(){
+    public String getQuoteByAuthor() {
         QuotesDto quotesDto = binder.getBean();
         return quotesService.getQuoteByAuthor(quotesDto).toString();
     }
 
-    public String getRandomQuote(){
+    public String getRandomQuote() {
         return quotesService.getRandomQuote().toString();
     }
-
+}
+/*
     public void setQuotesDto(QuotesDto quotesDto) {
         binder.setBean(quotesDto);
     }
-}
+}*/

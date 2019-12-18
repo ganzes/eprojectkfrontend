@@ -24,8 +24,6 @@ public class MainView extends VerticalLayout {
     private Icon vaadinIcon = new Icon(VaadinIcon.VAADIN_V);
 
     public MainView() {
-
-        setAlignItems(Alignment.CENTER);
         goToMotiveView.addThemeVariants(ButtonVariant.LUMO_LARGE);
         goToMotiveView.setAutofocus(true);
         goToMotiveView.addClickListener(event -> goToMotiveView.getUI().ifPresent(ui -> ui.navigate("motiveView")));
@@ -66,6 +64,8 @@ public class MainView extends VerticalLayout {
         add(mainViewLabel);
         add(goToMotiveView, goToBookView, goToMovieView, goToGameView, goToTvShowView, vaadinIcon);
         add(goToApiButtons);
+
+        setAlignItems(Alignment.CENTER);
 
         setSizeFull();
     }

@@ -32,7 +32,6 @@ public class MotiveView extends VerticalLayout {
     private Label gridMotiveDtoLabel = new Label("Main view from Motives");
     private Label gridSearchResultLabel = new Label("Search results from Motives");
 
-
     private TextArea tutorialMotives = new TextArea();
 
     public Grid<MotiveDto> getGridMotiveDto() {
@@ -43,16 +42,23 @@ public class MotiveView extends VerticalLayout {
         return gridSearchResult;
     }
 
-    public MotiveView(){
-        gridMotiveDto.setColumns("motiveText", "motiveAuthor", "motiveRating");
-        gridSearchResult.setColumns("motiveText", "motiveAuthor", "motiveRating");
+    public MotiveView() {
+        HorizontalLayout goTos = new HorizontalLayout(goToBookView, goToMovieView, goToGameView,
+                goToTvShowView, goToLoveView, goToQuoteView);
 
-        HorizontalLayout sercondContent = new HorizontalLayout(gridSearchResult, motiveForm);
-        sercondContent.setSizeFull();
         HorizontalLayout mainContent = new HorizontalLayout(gridMotiveDtoLabel, gridMotiveDto);
         mainContent.setSizeFull();
+
+        HorizontalLayout secondContent = new HorizontalLayout(gridSearchResult, motiveForm);
+        secondContent.setSizeFull();
+
+        gridMotiveDto.setColumns("motiveText", "motiveAuthor", "motiveRating");
         gridMotiveDto.setSizeFull();
+        gridMotiveDto.asSingleSelect().addValueChangeListener(event -> motiveForm.setMotiveDto(gridMotiveDto.asSingleSelect().getValue()));
+
+        gridSearchResult.setColumns("motiveText", "motiveAuthor", "motiveRating");
         gridSearchResult.setSizeFull();
+        gridSearchResult.asSingleSelect().addValueChangeListener(event -> motiveForm.setMotiveDto(gridSearchResult.asSingleSelect().getValue()));
 
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
@@ -72,9 +78,6 @@ public class MotiveView extends VerticalLayout {
         goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToBookView, goToMovieView, goToGameView,
-                goToTvShowView,goToLoveView, goToQuoteView);
-
         tutorialMotives.setReadOnly(true);
         tutorialMotives.setValue("Add motivational quotes from your favourite authors, and rate them!  When in doubt, refresh page!");
         tutorialMotives.setAutofocus(true);
@@ -83,31 +86,27 @@ public class MotiveView extends VerticalLayout {
         add(goTos);
         add(labelMotiveView);
         add(tutorialMotives);
-
         add(mainContent);
         add(gridSearchResultLabel);
-        add(sercondContent);
+        add(secondContent);
+
         setSizeFull();
         refresh();
-
-        gridMotiveDto.asSingleSelect().addValueChangeListener(event -> motiveForm.setMotiveDto(gridMotiveDto.asSingleSelect().getValue()));
-        gridSearchResult.asSingleSelect().addValueChangeListener(event -> motiveForm.setMotiveDto(gridSearchResult.asSingleSelect().getValue()));
-
     }
 
-    public void refresh(){
+    public void refresh() {
         gridMotiveDto.setItems(motiveService.getAllMotive());
     }
 
-    public void refreshByAllAuthors(String author){
+    public void refreshByAllAuthors(String author) {
         gridSearchResult.setItems(motiveService.findMotiveByAuthor(author));
     }
 
-    public void refreshByAllRatings(String motiveRating){
+    public void refreshByAllRatings(String motiveRating) {
         gridSearchResult.setItems(motiveService.findMotiveByRating(motiveRating));
     }
 
-    public void refreshFacade(){
+    public void refreshFacade() {
         gridMotiveDto.setItems(motiveService.getMotivesFacade());
     }
 }

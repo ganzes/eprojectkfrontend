@@ -6,11 +6,10 @@ import com.kodilla.eprojectkfrontend.views.LoveCalculatorView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
-
-import javax.servlet.http.HttpServletResponse;
 
 public class LoveCalculatorForm extends FormLayout {
 
@@ -20,7 +19,7 @@ public class LoveCalculatorForm extends FormLayout {
     private TextField sname = new TextField("Type second name");
 
     private Button result = new Button("What are the odds?");
-   // private Button saveResultToFile = new Button("Save your results to file!");
+    //private Button saveResultToFile = new Button("Save your results to file!");
 
     private Binder<LoveCalculatorDto> binder = new Binder<>(LoveCalculatorDto.class);
 
@@ -33,21 +32,24 @@ public class LoveCalculatorForm extends FormLayout {
     public LoveCalculatorForm(LoveCalculatorView loveCalculatorView) {
         this.loveCalculatorView = loveCalculatorView;
 
-//        HorizontalLayout buttons = new HorizontalLayout(result);
-        result.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-       // saveResultToFile.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-        add(fname, sname);
         binder.bindInstanceFields(this);
         binder.setBean(loveCalculatorDto);
+
+        result.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+
         resultGetPercentage.setReadOnly(true);
 
+        result.addClickListener(event -> resultGetPercentage.setValue(getPercentage()));
+
+        add(fname, sname);
         add(result);
         add(resultGetPercentage);
+
+        //HorizontalLayout buttons = new HorizontalLayout(result);
+        //saveResultToFile.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         //add(saveResultToFile);
 
-        result.addClickListener(event -> resultGetPercentage.setValue(getPercentage()));
         //saveResultToFile.addClickListener(event -> resultGetPercentage());
-
     }
 
     public String getPercentage() {
@@ -55,12 +57,12 @@ public class LoveCalculatorForm extends FormLayout {
         return loveCalculatorService.getPercentage(loveCalculatorDto).toString();
     }
 
-/*    //added for further implementation
+/*    added for further implementation
     public void resultGetPercentage() {
         loveCalculatorService.exportCSV();
     }*/
 
-    public void setLoveDto(LoveCalculatorDto loveCalculatorDto) {
+/*    public void setLoveDto(LoveCalculatorDto loveCalculatorDto) {
         binder.setBean(loveCalculatorDto);
-    }
+    }*/
 }

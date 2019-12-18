@@ -16,6 +16,7 @@ import com.vaadin.flow.router.Route;
 public class BookView extends VerticalLayout {
 
     private BookService bookService = new BookService();
+
     private Grid<BookDto> gridBookDto = new Grid<>(BookDto.class);
     private Grid<BookDto> gridSearchResult = new Grid<>(BookDto.class);
 
@@ -28,10 +29,9 @@ public class BookView extends VerticalLayout {
 
     private BookForm bookForm = new BookForm(this);
 
-    private Label labelBookView = new Label("Books");
+    private Label bookViewLabel = new Label("Books");
     private Label gridBookDtoLabel = new Label("Main view from Books");
     private Label gridSearchResultLabel = new Label("Search results from Books");
-
 
     private TextArea tutorialBooks = new TextArea();
 
@@ -43,16 +43,23 @@ public class BookView extends VerticalLayout {
         return gridSearchResult;
     }
 
-    public BookView(){
-        gridBookDto.setColumns("bookTitle", "bookAuthor", "bookRating");
-        gridSearchResult.setColumns("bookTitle", "bookAuthor", "bookRating");
+    public BookView() {
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToMovieView, goToGameView,
+                goToTvShowView, goToLoveView, goToQuoteView);
 
-        HorizontalLayout sercondContent = new HorizontalLayout(gridSearchResult, bookForm);
-        sercondContent.setSizeFull();
         HorizontalLayout mainContent = new HorizontalLayout(gridBookDtoLabel, gridBookDto);
         mainContent.setSizeFull();
+
+        HorizontalLayout secondContent = new HorizontalLayout(gridSearchResult, bookForm);
+        secondContent.setSizeFull();
+
+        gridBookDto.setColumns("bookTitle", "bookAuthor", "bookRating");
         gridBookDto.setSizeFull();
+        gridBookDto.asSingleSelect().addValueChangeListener(event -> bookForm.setBookDto(gridBookDto.asSingleSelect().getValue()));
+
+        gridSearchResult.setColumns("bookTitle", "bookAuthor", "bookRating");
         gridSearchResult.setSizeFull();
+        gridSearchResult.asSingleSelect().addValueChangeListener(event -> bookForm.setBookDto(gridSearchResult.asSingleSelect().getValue()));
 
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
@@ -72,38 +79,31 @@ public class BookView extends VerticalLayout {
         goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToMovieView, goToGameView,
-                goToTvShowView, goToLoveView, goToQuoteView);
-
         tutorialBooks.setReadOnly(true);
         tutorialBooks.setValue("Add your favourite books, and rate them! When in doubt, refresh page!");
         tutorialBooks.setAutofocus(true);
         tutorialBooks.setWidthFull();
 
         add(goTos);
-        add(labelBookView);
+        add(bookViewLabel);
         add(tutorialBooks);
-
         add(mainContent);
         add(gridSearchResultLabel);
-        add(sercondContent);
+        add(secondContent);
+
         setSizeFull();
         refresh();
-
-        gridBookDto.asSingleSelect().addValueChangeListener(event -> bookForm.setBookDto(gridBookDto.asSingleSelect().getValue()));
-        gridSearchResult.asSingleSelect().addValueChangeListener(event -> bookForm.setBookDto(gridSearchResult.asSingleSelect().getValue()));
-
     }
 
-    public void refresh(){
+    public void refresh() {
         gridBookDto.setItems(bookService.getAllBook());
     }
 
-    public void refreshByAllAuthors(String author){
+    public void refreshByAllAuthors(String author) {
         gridSearchResult.setItems(bookService.findBookByAuthor(author));
     }
 
-    public void refreshByAllRatings(String bookRating){
+    public void refreshByAllRatings(String bookRating) {
         gridSearchResult.setItems(bookService.findBookByRating(bookRating));
     }
 }

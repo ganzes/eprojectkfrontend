@@ -48,10 +48,8 @@ public class MovieForm extends FormLayout {
         deleteAllMovies.addThemeVariants(ButtonVariant.LUMO_ERROR);
         findMovieByDirector.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         findMovieByRating.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-        add(movieTitle, movieDirector, movieRating, buttons, buttonsSecondRow);
 
         countAllMoviesNumberField.setReadOnly(true);
-        add(countAllMoviesNumberField);
 
         binder.bindInstanceFields(this);
         binder.setBean(movieDto);
@@ -69,6 +67,9 @@ public class MovieForm extends FormLayout {
         deleteMovie.addClickListener(event -> UI.getCurrent().getPage().reload());
         updateMovie.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteAllMovies.addClickListener(event -> UI.getCurrent().getPage().reload());
+
+        add(movieTitle, movieDirector, movieRating, buttons, buttonsSecondRow);
+        add(countAllMoviesNumberField);
     }
 
     private void saveMovie() {

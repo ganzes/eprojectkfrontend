@@ -32,6 +32,9 @@ public class LoveCalculatorView extends VerticalLayout {
         VerticalLayout mainLoveContent = new VerticalLayout(loveCalculatorForm);
         mainLoveContent.setSizeFull();
 
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
+                goToTvShowView, goToGameView, goToQuoteView);
+
         goToMotiveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToMotiveView.addClickListener(event -> goToMotiveView.getUI().ifPresent(ui -> ui.navigate("motiveView")));
 
@@ -49,9 +52,6 @@ public class LoveCalculatorView extends VerticalLayout {
 
         goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
-
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
-                goToTvShowView, goToGameView, goToQuoteView);
 
         tutorialLoveCalculator.setReadOnly(true);
         tutorialLoveCalculator.setValue("Ever wonder who of your closest friends have a shot at love? " +

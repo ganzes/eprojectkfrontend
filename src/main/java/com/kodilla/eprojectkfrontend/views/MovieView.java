@@ -43,16 +43,23 @@ public class MovieView extends VerticalLayout {
         return gridSearchResult;
     }
 
-    public MovieView(){
-        gridMovieDto.setColumns("movieTitle", "movieDirector", "movieRating");
-        gridSearchResult.setColumns("movieTitle", "movieDirector", "movieRating");
-
-        HorizontalLayout sercondContent = new HorizontalLayout(gridSearchResult, movieForm);
-        sercondContent.setSizeFull();
+    public MovieView() {
         HorizontalLayout mainContent = new HorizontalLayout(gridMovieDtoLabel, gridMovieDto);
         mainContent.setSizeFull();
+
+        HorizontalLayout secondContent = new HorizontalLayout(gridSearchResult, movieForm);
+        secondContent.setSizeFull();
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToGameView,
+                goToTvShowView, goToLoveView, goToQuoteView);
+
+        gridMovieDto.setColumns("movieTitle", "movieDirector", "movieRating");
         gridMovieDto.setSizeFull();
+        gridMovieDto.asSingleSelect().addValueChangeListener(event -> movieForm.setMovieDto(gridMovieDto.asSingleSelect().getValue()));
+
+        gridSearchResult.setColumns("movieTitle", "movieDirector", "movieRating");
         gridSearchResult.setSizeFull();
+        gridSearchResult.asSingleSelect().addValueChangeListener(event -> movieForm.setMovieDto(gridSearchResult.asSingleSelect().getValue()));
 
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
@@ -72,9 +79,6 @@ public class MovieView extends VerticalLayout {
         goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToGameView,
-                goToTvShowView, goToLoveView, goToQuoteView);
-
         tutorialMovies.setReadOnly(true);
         tutorialMovies.setValue("Add your favourite movies, and rate them! When in doubt, refresh page!");
         tutorialMovies.setAutofocus(true);
@@ -83,27 +87,24 @@ public class MovieView extends VerticalLayout {
         add(goTos);
         add(labelMovieView);
         add(tutorialMovies);
-
         add(mainContent);
         add(gridSearchResultLabel);
-        add(sercondContent);
+        add(secondContent);
+
         setSizeFull();
+
         refresh();
-
-        gridMovieDto.asSingleSelect().addValueChangeListener(event -> movieForm.setMovieDto(gridMovieDto.asSingleSelect().getValue()));
-        gridSearchResult.asSingleSelect().addValueChangeListener(event -> movieForm.setMovieDto(gridSearchResult.asSingleSelect().getValue()));
-
     }
 
-    public void refresh(){
+    public void refresh() {
         gridMovieDto.setItems(movieService.getAllMovie());
     }
 
-    public void refreshByAllDirectors(String author){
+    public void refreshByAllDirectors(String author) {
         gridSearchResult.setItems(movieService.findMovieByDirector(author));
     }
 
-    public void refreshByAllRatings(String movieRating){
+    public void refreshByAllRatings(String movieRating) {
         gridSearchResult.setItems(movieService.findMovieByRating(movieRating));
     }
 }

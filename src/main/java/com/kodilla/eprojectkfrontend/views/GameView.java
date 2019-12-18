@@ -16,6 +16,7 @@ import com.vaadin.flow.router.Route;
 public class GameView extends VerticalLayout {
 
     private GameService gameService = new GameService();
+
     private Grid<GameDto> gridGameDto = new Grid<>(GameDto.class);
     private Grid<GameDto> gridSearchResult = new Grid<>(GameDto.class);
 
@@ -28,10 +29,9 @@ public class GameView extends VerticalLayout {
 
     private GameForm gameForm = new GameForm(this);
 
-    private Label labelGameView = new Label("Games");
+    private Label gameViewLabel = new Label("Games");
     private Label gridGameDtoLabel = new Label("Main view from Games");
     private Label gridSearchResultLabel = new Label("Search results from Games");
-
 
     private TextArea tutorialGames = new TextArea();
 
@@ -43,16 +43,23 @@ public class GameView extends VerticalLayout {
         return gridSearchResult;
     }
 
-    public GameView(){
-        gridGameDto.setColumns("gameTitle", "gameDeveloper", "gameRating");
-        gridSearchResult.setColumns("gameTitle", "gameDeveloper", "gameRating");
-
-        HorizontalLayout sercondContent = new HorizontalLayout(gridSearchResult, gameForm);
-        sercondContent.setSizeFull();
+    public GameView() {
         HorizontalLayout mainContent = new HorizontalLayout(gridGameDtoLabel, gridGameDto);
         mainContent.setSizeFull();
+
+        HorizontalLayout secondContent = new HorizontalLayout(gridSearchResult, gameForm);
+        secondContent.setSizeFull();
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
+                goToTvShowView, goToLoveView, goToQuoteView);
+
+        gridGameDto.setColumns("gameTitle", "gameDeveloper", "gameRating");
         gridGameDto.setSizeFull();
+        gridGameDto.asSingleSelect().addValueChangeListener(event -> gameForm.setGameDto(gridGameDto.asSingleSelect().getValue()));
+
+        gridSearchResult.setColumns("gameTitle", "gameDeveloper", "gameRating");
         gridSearchResult.setSizeFull();
+        gridSearchResult.asSingleSelect().addValueChangeListener(event -> gameForm.setGameDto(gridSearchResult.asSingleSelect().getValue()));
 
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
@@ -72,37 +79,31 @@ public class GameView extends VerticalLayout {
         goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
-                goToTvShowView, goToLoveView, goToQuoteView);
-
         tutorialGames.setReadOnly(true);
         tutorialGames.setValue("Add your favourite games, and rate them! When in doubt, refresh page!");
         tutorialGames.setAutofocus(true);
         tutorialGames.setWidthFull();
 
         add(goTos);
-        add(labelGameView);
+        add(gameViewLabel);
         add(tutorialGames);
-
         add(mainContent);
         add(gridSearchResultLabel);
-        add(sercondContent);
+        add(secondContent);
+
         setSizeFull();
         refresh();
-
-        gridGameDto.asSingleSelect().addValueChangeListener(event -> gameForm.setGameDto(gridGameDto.asSingleSelect().getValue()));
-        gridSearchResult.asSingleSelect().addValueChangeListener(event -> gameForm.setGameDto(gridSearchResult.asSingleSelect().getValue()));
     }
 
-    public void refresh(){
+    public void refresh() {
         gridGameDto.setItems(gameService.getAllGame());
     }
 
-    public void refreshByAllDevelopers(String author){
+    public void refreshByAllDevelopers(String author) {
         gridSearchResult.setItems(gameService.findGameByDeveloper(author));
     }
 
-    public void refreshByAllRatings(String gameRating){
+    public void refreshByAllRatings(String gameRating) {
         gridSearchResult.setItems(gameService.findGameByRating(gameRating));
     }
 }

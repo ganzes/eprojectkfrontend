@@ -32,7 +32,6 @@ public class TvShowView extends VerticalLayout {
     private Label gridTvShowDtoLabel = new Label("Main view from TvShows");
     private Label gridSearchResultLabel = new Label("Search results from TvShows");
 
-
     private TextArea tutorialTvShows = new TextArea();
 
     public Grid<TvShowDto> getGridTvShowDto() {
@@ -44,15 +43,22 @@ public class TvShowView extends VerticalLayout {
     }
 
     public TvShowView() {
-        gridTvShowDto.setColumns("tvShowTitle", "tvShowCategory", "tvShowRating");
-        gridSearchResult.setColumns("tvShowTitle", "tvShowCategory", "tvShowRating");
-
-        HorizontalLayout sercondContent = new HorizontalLayout(gridSearchResult, tvShowForm);
-        sercondContent.setSizeFull();
         HorizontalLayout mainContent = new HorizontalLayout(gridTvShowDtoLabel, gridTvShowDto);
         mainContent.setSizeFull();
+
+        HorizontalLayout secondContent = new HorizontalLayout(gridSearchResult, tvShowForm);
+        secondContent.setSizeFull();
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToMovieView, goToGameView,
+                goToBookView, goToLoveView, goToQuoteView);
+
+        gridTvShowDto.setColumns("tvShowTitle", "tvShowCategory", "tvShowRating");
         gridTvShowDto.setSizeFull();
+        gridTvShowDto.asSingleSelect().addValueChangeListener(event -> tvShowForm.setTvShowDto(gridTvShowDto.asSingleSelect().getValue()));
+
+        gridSearchResult.setColumns("tvShowTitle", "tvShowCategory", "tvShowRating");
         gridSearchResult.setSizeFull();
+        gridSearchResult.asSingleSelect().addValueChangeListener(event -> tvShowForm.setTvShowDto(gridSearchResult.asSingleSelect().getValue()));
 
         goToLoveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToLoveView.addClickListener(event -> goToLoveView.getUI().ifPresent(ui -> ui.navigate("loveCalculatorView")));
@@ -72,9 +78,6 @@ public class TvShowView extends VerticalLayout {
         goToBookView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToBookView.addClickListener(event -> goToBookView.getUI().ifPresent(ui -> ui.navigate("bookView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToMovieView, goToGameView,
-                goToBookView, goToLoveView, goToQuoteView);
-
         tutorialTvShows.setReadOnly(true);
         tutorialTvShows.setValue("Add your favourite tvShows, and rate them! When in doubt, refresh page!");
         tutorialTvShows.setAutofocus(true);
@@ -86,13 +89,11 @@ public class TvShowView extends VerticalLayout {
 
         add(mainContent);
         add(gridSearchResultLabel);
-        add(sercondContent);
+        add(secondContent);
+
         setSizeFull();
+
         refresh();
-
-        gridTvShowDto.asSingleSelect().addValueChangeListener(event -> tvShowForm.setTvShowDto(gridTvShowDto.asSingleSelect().getValue()));
-        gridSearchResult.asSingleSelect().addValueChangeListener(event -> tvShowForm.setTvShowDto(gridSearchResult.asSingleSelect().getValue()));
-
     }
 
     public void refresh() {

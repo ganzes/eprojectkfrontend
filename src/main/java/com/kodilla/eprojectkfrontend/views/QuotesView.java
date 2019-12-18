@@ -26,10 +26,12 @@ public class QuotesView extends VerticalLayout {
 
     private TextArea tutorial = new TextArea();
 
-    public QuotesView(){
-
+    public QuotesView() {
         VerticalLayout mainQuotesContent = new VerticalLayout(quotesForm);
         mainQuotesContent.setSizeFull();
+
+        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
+                goToTvShowView, goToGameView, goToLoveView);
 
         goToMotiveView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToMotiveView.addClickListener(event -> goToMotiveView.getUI().ifPresent(ui -> ui.navigate("motiveView")));
@@ -49,9 +51,6 @@ public class QuotesView extends VerticalLayout {
         goToTvShowView.addThemeVariants(ButtonVariant.LUMO_SMALL);
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
-        HorizontalLayout goTos = new HorizontalLayout(goToMotiveView, goToBookView, goToMovieView,
-                goToTvShowView, goToGameView, goToLoveView);
-
         tutorial.setReadOnly(true);
         tutorial.setAutofocus(true);
         tutorial.setWidthFull();
@@ -61,7 +60,6 @@ public class QuotesView extends VerticalLayout {
         add(goTos);
         add(labelQuotesView);
         add(tutorial);
-
         add(mainQuotesContent);
 
         setSizeFull();
