@@ -61,8 +61,14 @@ public class MainView extends VerticalLayout {
         goToApiButtons.add(goToLoveView);
         goToApiButtons.add(goToQuoteView);
 
+        HorizontalLayout secondRowView = new HorizontalLayout();
+        secondRowView.add(goToGameView);
+        secondRowView.add(goToTvShowView);
+
         add(mainViewLabel);
-        add(goToMotiveView, goToBookView, goToMovieView, goToGameView, goToTvShowView, vaadinIcon);
+        add(goToMotiveView, goToBookView, goToMovieView);
+        add(secondRowView);
+        add(vaadinIcon);
         add(goToApiButtons);
 
         setAlignItems(Alignment.CENTER);
