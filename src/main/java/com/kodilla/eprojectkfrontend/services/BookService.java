@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,14 +22,11 @@ public class BookService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<BookDto> getAllBook() throws HttpServerErrorException {
-        List<BookDto> bookDtoList = new ArrayList<>();
         BookDto[] allBookList = restTemplate.getForObject("http://localhost:8080/eprojectk/book/getBooks", BookDto[].class);
 
-        for (int i = 0; i < allBookList.length; i++) {
-            bookDtoList.add(allBookList[i]);
-        }
+        assert allBookList != null;
 
-        return bookDtoList;
+        return new ArrayList<>(Arrays.asList(allBookList));
     }
 
     public void createBook(final BookDto bookDto) throws HttpServerErrorException {
@@ -58,31 +56,21 @@ public class BookService {
     }
 
     public List<BookDto> findBookByAuthor(final String author) throws HttpServerErrorException {
-        List<BookDto> bookDtoList = new ArrayList<>();
-
         BookDto[] allBookList = restTemplate.getForObject("http://localhost:8080/eprojectk/book/getBookByAuthor?bookAuthor=" + author, BookDto[].class);
 
-        for (int i = 0; i < allBookList.length; i++) {
-            bookDtoList.add(allBookList[i]);
-        }
+        assert allBookList != null;
 
-        return bookDtoList;
+        return new ArrayList<>(Arrays.asList(allBookList));
     }
 
     public List<BookDto> findBookByRating(final String bookRating) throws HttpServerErrorException {
-        List<BookDto> bookDtoList = new ArrayList<>();
-
         BookDto[] allBookList = restTemplate.getForObject("http://localhost:8080/eprojectk/book/getBookByRating?bookRating=" + bookRating, BookDto[].class);
 
-        for (int i = 0; i < allBookList.length; i++) {
-            bookDtoList.add(allBookList[i]);
-        }
-
-        return bookDtoList;
+        assert allBookList != null;
+        return new ArrayList<>(Arrays.asList(allBookList));
     }
 
     public Long countAllBooks() throws NullPointerException {
-        long allBook = restTemplate.getForObject("http://localhost:8080/eprojectk/book/countAllBooks", Long.class);
-        return allBook;
+        return restTemplate.getForObject("http://localhost:8080/eprojectk/book/countAllBooks", Long.class);
     }
 }

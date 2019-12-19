@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,13 +22,9 @@ public class MotiveService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<MotiveDto> getAllMotive() throws HttpServerErrorException {
-        List<MotiveDto> motiveDtoList = new ArrayList<>();
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotives", MotiveDto[].class);
 
-        for (int i = 0; i < allMotiveList.length; i++) {
-            motiveDtoList.add(allMotiveList[i]);
-        }
-        return motiveDtoList;
+        return new ArrayList<>(Arrays.asList(allMotiveList));
     }
 
     public void createMotive(final MotiveDto motiveDto) throws HttpServerErrorException {
@@ -57,39 +54,27 @@ public class MotiveService {
     }
 
     public List<MotiveDto> findMotiveByAuthor(final String author) throws HttpServerErrorException {
-        List<MotiveDto> motiveDtoList = new ArrayList<>();
-
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotiveByAuthor?motiveAuthor=" + author, MotiveDto[].class);
 
-        for (int i = 0; i < allMotiveList.length; i++) {
-            motiveDtoList.add(allMotiveList[i]);
-        }
-        return motiveDtoList;
+        assert allMotiveList != null;
+        return new ArrayList<>(Arrays.asList(allMotiveList));
     }
 
     public List<MotiveDto> findMotiveByRating(final String motiveRating) throws HttpServerErrorException {
-        List<MotiveDto> motiveDtoList = new ArrayList<>();
-
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotiveByRating?motiveRating=" + motiveRating, MotiveDto[].class);
 
-        for (int i = 0; i < allMotiveList.length; i++) {
-            motiveDtoList.add(allMotiveList[i]);
-        }
-        return motiveDtoList;
+        assert allMotiveList != null;
+        return new ArrayList<>(Arrays.asList(allMotiveList));
     }
 
     public List<MotiveDto> getMotivesFacade() throws HttpServerErrorException {
-        List<MotiveDto> motiveDtoList = new ArrayList<>();
         MotiveDto[] allMotiveList = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/getMotivesFacade", MotiveDto[].class);
 
-        for (int i = 0; i < allMotiveList.length; i++) {
-            motiveDtoList.add(allMotiveList[i]);
-        }
-        return motiveDtoList;
+        assert allMotiveList != null;
+        return new ArrayList<>(Arrays.asList(allMotiveList));
     }
 
     public Long countAllMotives() throws NullPointerException {
-        long allMotives = restTemplate.getForObject("http://localhost:8080/eprojectk/motive/countAllMotives", Long.class);
-        return allMotives;
+        return restTemplate.getForObject("http://localhost:8080/eprojectk/motive/countAllMotives", Long.class);
     }
 }

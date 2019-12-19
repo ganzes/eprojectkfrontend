@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,14 +22,11 @@ public class MovieService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<MovieDto> getAllMovie() throws HttpServerErrorException {
-        List<MovieDto> movieDtoList = new ArrayList<>();
         MovieDto[] allMovieList = restTemplate.getForObject("http://localhost:8080/eprojectk/movie/getMovies", MovieDto[].class);
 
-        for (int i = 0; i < allMovieList.length; i++) {
-            movieDtoList.add(allMovieList[i]);
-        }
+        assert allMovieList != null;
 
-        return movieDtoList;
+        return new ArrayList<>(Arrays.asList(allMovieList));
     }
 
     public void createMovie(final MovieDto movieDto) throws HttpServerErrorException {
@@ -58,29 +56,20 @@ public class MovieService {
     }
 
     public List<MovieDto> findMovieByDirector(final String author) throws HttpServerErrorException {
-        List<MovieDto> movieDtoList = new ArrayList<>();
-
         MovieDto[] allMovieList = restTemplate.getForObject("http://localhost:8080/eprojectk/movie/getMovieByDirector?movieDirector=" + author, MovieDto[].class);
 
-        for (int i = 0; i < allMovieList.length; i++) {
-            movieDtoList.add(allMovieList[i]);
-        }
-        return movieDtoList;
+        assert allMovieList != null;
+        return new ArrayList<>(Arrays.asList(allMovieList));
     }
 
     public List<MovieDto> findMovieByRating(final String movieRating) throws HttpServerErrorException {
-        List<MovieDto> movieDtoList = new ArrayList<>();
-
         MovieDto[] allMovieList = restTemplate.getForObject("http://localhost:8080/eprojectk/movie/getMovieByRating?movieRating=" + movieRating, MovieDto[].class);
 
-        for (int i = 0; i < allMovieList.length; i++) {
-            movieDtoList.add(allMovieList[i]);
-        }
-        return movieDtoList;
+        assert allMovieList != null;
+        return new ArrayList<>(Arrays.asList(allMovieList));
     }
 
     public Long countAllMovies() throws NullPointerException {
-        long allMovie = restTemplate.getForObject("http://localhost:8080/eprojectk/movie/countAllMovies", Long.class);
-        return allMovie;
+        return restTemplate.getForObject("http://localhost:8080/eprojectk/movie/countAllMovies", Long.class);
     }
 }

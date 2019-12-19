@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,14 +22,9 @@ public class TvShowService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<TvShowDto> getAllTvShow() throws HttpServerErrorException {
-        List<TvShowDto> tvShowDtoList = new ArrayList<>();
         TvShowDto[] allTvShowList = restTemplate.getForObject("http://localhost:8080/eprojectk/tvShow/getTvShows", TvShowDto[].class);
 
-        for (int i = 0; i < allTvShowList.length; i++) {
-            tvShowDtoList.add(allTvShowList[i]);
-        }
-
-        return tvShowDtoList;
+        return new ArrayList<>(Arrays.asList(allTvShowList));
     }
 
     public void createTvShow(final TvShowDto tvShowDto) throws HttpServerErrorException {
@@ -58,31 +54,22 @@ public class TvShowService {
     }
 
     public List<TvShowDto> findTvShowByCategory(final String author) throws HttpServerErrorException {
-        List<TvShowDto> tvShowDtoList = new ArrayList<>();
-
         TvShowDto[] allTvShowList = restTemplate.getForObject("http://localhost:8080/eprojectk/tvShow/getTvShowByCategory?tvShowCategory=" + author, TvShowDto[].class);
 
-        for (int i = 0; i < allTvShowList.length; i++) {
-            tvShowDtoList.add(allTvShowList[i]);
-        }
+        assert allTvShowList != null;
 
-        return tvShowDtoList;
+        return new ArrayList<>(Arrays.asList(allTvShowList));
     }
 
     public List<TvShowDto> findTvShowByRating(final String tvShowRating) throws HttpServerErrorException {
-        List<TvShowDto> tvShowDtoList = new ArrayList<>();
-
         TvShowDto[] allTvShowList = restTemplate.getForObject("http://localhost:8080/eprojectk/tvShow/getTvShowByRating?tvShowRating=" + tvShowRating, TvShowDto[].class);
 
-        for (int i = 0; i < allTvShowList.length; i++) {
-            tvShowDtoList.add(allTvShowList[i]);
-        }
+        assert allTvShowList != null;
 
-        return tvShowDtoList;
+        return new ArrayList<>(Arrays.asList(allTvShowList));
     }
 
     public Long countAllTvShows() throws NullPointerException {
-        long allTvShow = restTemplate.getForObject("http://localhost:8080/eprojectk/tvShow/countAllTvShows", Long.class);
-        return allTvShow;
+        return restTemplate.getForObject("http://localhost:8080/eprojectk/tvShow/countAllTvShows", Long.class);
     }
 }
