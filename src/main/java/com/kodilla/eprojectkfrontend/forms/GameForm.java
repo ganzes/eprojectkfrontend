@@ -11,7 +11,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import lombok.Getter;
 
+@Getter
 public class GameForm extends FormLayout {
 
     private GameView gameView;
@@ -38,6 +40,8 @@ public class GameForm extends FormLayout {
 
     public GameForm(GameView gameView) {
         this.gameView = gameView;
+
+        updateGame.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(saveGame, deleteGame, updateGame, deleteAllGames);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findGameByDeveloper, findGameByRating, buttonCountAllGames);

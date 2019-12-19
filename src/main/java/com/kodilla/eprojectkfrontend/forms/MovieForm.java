@@ -11,7 +11,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import lombok.Getter;
 
+@Getter
 public class MovieForm extends FormLayout {
 
     private MovieView movieView;
@@ -38,6 +40,8 @@ public class MovieForm extends FormLayout {
 
     public MovieForm(MovieView movieView) {
         this.movieView = movieView;
+
+        updateMovie.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(saveMovie, deleteMovie, updateMovie, deleteAllMovies);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMovieByDirector, findMovieByRating, buttonCountAllMovies);

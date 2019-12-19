@@ -55,7 +55,7 @@ public class GameView extends VerticalLayout {
 
         gridGameDto.setColumns("gameTitle", "gameDeveloper", "gameRating");
         gridGameDto.setSizeFull();
-        gridGameDto.asSingleSelect().addValueChangeListener(event -> gameForm.setGameDto(gridGameDto.asSingleSelect().getValue()));
+        gridGameDto.asSingleSelect().addValueChangeListener(event -> check());
 
         gridSearchResult.setColumns("gameTitle", "gameDeveloper", "gameRating");
         gridSearchResult.setSizeFull();
@@ -105,5 +105,10 @@ public class GameView extends VerticalLayout {
 
     public void refreshByAllRatings(String gameRating) {
         gridSearchResult.setItems(gameService.findGameByRating(gameRating));
+    }
+
+    public void check(){
+        gameForm.setGameDto(gridGameDto.asSingleSelect().getValue());
+        gameForm.getUpdateGame().setEnabled(true);
     }
 }

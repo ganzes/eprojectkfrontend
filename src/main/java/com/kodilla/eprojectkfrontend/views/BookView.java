@@ -55,7 +55,7 @@ public class BookView extends VerticalLayout {
 
         gridBookDto.setColumns("bookTitle", "bookAuthor", "bookRating");
         gridBookDto.setSizeFull();
-        gridBookDto.asSingleSelect().addValueChangeListener(event -> bookForm.setBookDto(gridBookDto.asSingleSelect().getValue()));
+        gridBookDto.asSingleSelect().addValueChangeListener(event -> check());
 
         gridSearchResult.setColumns("bookTitle", "bookAuthor", "bookRating");
         gridSearchResult.setSizeFull();
@@ -105,5 +105,10 @@ public class BookView extends VerticalLayout {
 
     public void refreshByAllRatings(String bookRating) {
         gridSearchResult.setItems(bookService.findBookByRating(bookRating));
+    }
+
+    public void check(){
+        bookForm.setBookDto(gridBookDto.asSingleSelect().getValue());
+        bookForm.getUpdateBook().setEnabled(true);
     }
 }

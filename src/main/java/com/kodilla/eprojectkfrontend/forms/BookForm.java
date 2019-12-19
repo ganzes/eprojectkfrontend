@@ -11,7 +11,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import lombok.Getter;
 
+@Getter
 public class BookForm extends FormLayout {
 
     private BookView bookView;
@@ -38,6 +40,8 @@ public class BookForm extends FormLayout {
 
     public BookForm(BookView bookView) {
         this.bookView = bookView;
+
+        updateBook.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(saveBook, deleteBook, updateBook, deleteAllBooks);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findBookByAuthor, findBookByRating, buttonCountAllBooks);

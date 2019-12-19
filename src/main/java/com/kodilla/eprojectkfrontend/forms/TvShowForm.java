@@ -11,7 +11,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import lombok.Getter;
 
+@Getter
 public class TvShowForm extends FormLayout {
 
     private TvShowView tvShowView;
@@ -38,6 +40,8 @@ public class TvShowForm extends FormLayout {
 
     public TvShowForm(TvShowView tvShowView) {
         this.tvShowView = tvShowView;
+
+        updateTvShow.setEnabled(false);
 
         binder.bindInstanceFields(this);
         binder.setBean(tvShowDto);

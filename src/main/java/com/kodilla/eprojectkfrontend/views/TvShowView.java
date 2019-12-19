@@ -54,7 +54,7 @@ public class TvShowView extends VerticalLayout {
 
         gridTvShowDto.setColumns("tvShowTitle", "tvShowCategory", "tvShowRating");
         gridTvShowDto.setSizeFull();
-        gridTvShowDto.asSingleSelect().addValueChangeListener(event -> tvShowForm.setTvShowDto(gridTvShowDto.asSingleSelect().getValue()));
+        gridTvShowDto.asSingleSelect().addValueChangeListener(event -> check());
 
         gridSearchResult.setColumns("tvShowTitle", "tvShowCategory", "tvShowRating");
         gridSearchResult.setSizeFull();
@@ -106,5 +106,10 @@ public class TvShowView extends VerticalLayout {
 
     public void refreshByAllRatings(String tvShowRating) {
         gridSearchResult.setItems(tvShowService.findTvShowByRating(tvShowRating));
+    }
+
+    public void check(){
+        tvShowForm.setTvShowDto(gridTvShowDto.asSingleSelect().getValue());
+        tvShowForm.getUpdateTvShow().setEnabled(true);
     }
 }

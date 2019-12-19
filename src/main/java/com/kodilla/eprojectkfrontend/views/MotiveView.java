@@ -54,7 +54,7 @@ public class MotiveView extends VerticalLayout {
 
         gridMotiveDto.setColumns("motiveText", "motiveAuthor", "motiveRating");
         gridMotiveDto.setSizeFull();
-        gridMotiveDto.asSingleSelect().addValueChangeListener(event -> motiveForm.setMotiveDto(gridMotiveDto.asSingleSelect().getValue()));
+        gridMotiveDto.asSingleSelect().addValueChangeListener(event -> check());
 
         gridSearchResult.setColumns("motiveText", "motiveAuthor", "motiveRating");
         gridSearchResult.setSizeFull();
@@ -108,5 +108,10 @@ public class MotiveView extends VerticalLayout {
 
     public void refreshFacade() {
         gridMotiveDto.setItems(motiveService.getMotivesFacade());
+    }
+
+    public void check(){
+        motiveForm.setMotiveDto(gridMotiveDto.asSingleSelect().getValue());
+        motiveForm.getUpdateMotive().setEnabled(true);
     }
 }

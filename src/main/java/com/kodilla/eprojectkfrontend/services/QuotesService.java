@@ -13,7 +13,6 @@ public class QuotesService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-
     public QuotesDto getQuoteByKeyword(final QuotesDto quotesDto) throws HttpServerErrorException {
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/quotes/?keyword=" + quotesDto.getKeywords())
                 .build().encode().toUri();
@@ -36,20 +35,4 @@ public class QuotesService {
         QuotesDto quotesDto1 = restTemplate.getForObject(uri, QuotesDto.class);
         return quotesDto1;
     }
-
-
-
-/*    public QuotesDto setQuotesNull() {
-        QuotesDto quotesDto = new QuotesDto();
-        quotesDto.setMessage(null);
-        quotesDto.setAuthor(null);
-        quotesDto.setKeywords(null);
-        quotesDto.setProfession(null);
-        quotesDto.setNationality(null);
-        quotesDto.setAuthorBirth(null);
-        quotesDto.setAuthorDeath(null);
-
-        return quotesDto;
-    }*/
-
 }

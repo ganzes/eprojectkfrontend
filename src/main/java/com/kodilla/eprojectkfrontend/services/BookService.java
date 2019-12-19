@@ -1,7 +1,10 @@
 package com.kodilla.eprojectkfrontend.services;
 
 import com.kodilla.eprojectkfrontend.domains.BookDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -12,6 +15,8 @@ import java.util.List;
 
 @Service
 public class BookService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -27,9 +32,13 @@ public class BookService {
     }
 
     public void createBook(final BookDto bookDto) throws HttpServerErrorException {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/book/createBook")
-                .build().encode().toUri();
-        restTemplate.postForObject(url, bookDto, BookDto.class);
+        try {
+            URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/book/createBook")
+                    .build().encode().toUri();
+            restTemplate.postForObject(url, bookDto, BookDto.class);
+        } catch (HttpClientErrorException e) {
+            LOGGER.warn("User out of bounds! " + e);
+        }
     }
 
     public void deleteBook(final Long bookID) throws HttpServerErrorException {
@@ -37,10 +46,14 @@ public class BookService {
     }
 
     public void updateBook(final BookDto bookDto) throws HttpServerErrorException {
-        restTemplate.put("http://localhost:8080/eprojectk/book/updateBook", bookDto, BookDto.class);
+        try {
+            restTemplate.put("http://localhost:8080/eprojectk/book/updateBook", bookDto, BookDto.class);
+        } catch (HttpClientErrorException e) {
+            LOGGER.warn("User out of bounds! " + e);
+        }
     }
 
-    public void deleteAllBooks() throws HttpServerErrorException {
+    public void deleteAllBooks() throws HttpClientErrorException {
         restTemplate.delete("http://localhost:8080/eprojectk/book/deleteAllBooks");
     }
 

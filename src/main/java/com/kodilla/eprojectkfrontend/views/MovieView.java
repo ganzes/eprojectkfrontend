@@ -55,7 +55,7 @@ public class MovieView extends VerticalLayout {
 
         gridMovieDto.setColumns("movieTitle", "movieDirector", "movieRating");
         gridMovieDto.setSizeFull();
-        gridMovieDto.asSingleSelect().addValueChangeListener(event -> movieForm.setMovieDto(gridMovieDto.asSingleSelect().getValue()));
+        gridMovieDto.asSingleSelect().addValueChangeListener(event -> check());
 
         gridSearchResult.setColumns("movieTitle", "movieDirector", "movieRating");
         gridSearchResult.setSizeFull();
@@ -106,5 +106,10 @@ public class MovieView extends VerticalLayout {
 
     public void refreshByAllRatings(String movieRating) {
         gridSearchResult.setItems(movieService.findMovieByRating(movieRating));
+    }
+
+    public void check() {
+        movieForm.setMovieDto(gridMovieDto.asSingleSelect().getValue());
+        movieForm.getUpdateMovie().setEnabled(true);
     }
 }

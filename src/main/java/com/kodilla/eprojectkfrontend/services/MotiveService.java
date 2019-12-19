@@ -1,8 +1,10 @@
 package com.kodilla.eprojectkfrontend.services;
 
 import com.kodilla.eprojectkfrontend.domains.MotiveDto;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -14,6 +16,8 @@ import java.util.List;
 @Service
 public class MotiveService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MotiveService.class);
+
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<MotiveDto> getAllMotive() throws HttpServerErrorException {
@@ -23,22 +27,29 @@ public class MotiveService {
         for (int i = 0; i < allMotiveList.length; i++) {
             motiveDtoList.add(allMotiveList[i]);
         }
-
         return motiveDtoList;
     }
 
     public void createMotive(final MotiveDto motiveDto) throws HttpServerErrorException {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/motive/createMotive")
-                .build().encode().toUri();
-        restTemplate.postForObject(url, motiveDto, MotiveDto.class);
+        try {
+            URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/motive/createMotive")
+                    .build().encode().toUri();
+            restTemplate.postForObject(url, motiveDto, MotiveDto.class);
+        } catch (HttpClientErrorException e) {
+            LOGGER.warn("User out of bounds! " + e);
+        }
     }
 
-    public void deleteMotive(final Long motiveID) throws HttpServerErrorException {
+    public void deleteMotive(final Long motiveID) throws HttpClientErrorException {
         restTemplate.delete("http://localhost:8080/eprojectk/motive/deleteMotive?motiveID=" + motiveID);
     }
 
     public void updateMotive(final MotiveDto motiveDto) throws HttpServerErrorException {
-        restTemplate.put("http://localhost:8080/eprojectk/motive/updateMotive", motiveDto, MotiveDto.class);
+        try {
+            restTemplate.put("http://localhost:8080/eprojectk/motive/updateMotive", motiveDto, MotiveDto.class);
+        } catch (HttpClientErrorException e) {
+            LOGGER.warn("User out of bounds! " + e);
+        }
     }
 
     public void deleteAllMotives() {
@@ -53,7 +64,6 @@ public class MotiveService {
         for (int i = 0; i < allMotiveList.length; i++) {
             motiveDtoList.add(allMotiveList[i]);
         }
-
         return motiveDtoList;
     }
 
@@ -65,7 +75,6 @@ public class MotiveService {
         for (int i = 0; i < allMotiveList.length; i++) {
             motiveDtoList.add(allMotiveList[i]);
         }
-
         return motiveDtoList;
     }
 
@@ -76,7 +85,6 @@ public class MotiveService {
         for (int i = 0; i < allMotiveList.length; i++) {
             motiveDtoList.add(allMotiveList[i]);
         }
-
         return motiveDtoList;
     }
 

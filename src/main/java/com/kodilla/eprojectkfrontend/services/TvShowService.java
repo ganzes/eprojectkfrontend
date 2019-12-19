@@ -1,7 +1,10 @@
 package com.kodilla.eprojectkfrontend.services;
 
 import com.kodilla.eprojectkfrontend.domains.TvShowDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -12,6 +15,8 @@ import java.util.List;
 
 @Service
 public class TvShowService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TvShowService.class);
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -27,17 +32,25 @@ public class TvShowService {
     }
 
     public void createTvShow(final TvShowDto tvShowDto) throws HttpServerErrorException {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/tvShow/createTvShow")
-                .build().encode().toUri();
-        restTemplate.postForObject(url, tvShowDto, TvShowDto.class);
+        try {
+            URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/tvShow/createTvShow")
+                    .build().encode().toUri();
+            restTemplate.postForObject(url, tvShowDto, TvShowDto.class);
+        } catch (HttpClientErrorException e) {
+            LOGGER.warn("User out of bounds! " + e);
+        }
     }
 
-    public void deleteTvShow(final Long tvShowID) throws HttpServerErrorException {
+    public void deleteTvShow(final Long tvShowID) throws HttpClientErrorException {
         restTemplate.delete("http://localhost:8080/eprojectk/tvShow/deleteTvShow?tvShowID=" + tvShowID);
     }
 
     public void updateTvShow(final TvShowDto tvShowDto) throws HttpServerErrorException {
-        restTemplate.put("http://localhost:8080/eprojectk/tvShow/updateTvShow", tvShowDto, TvShowDto.class);
+        try {
+            restTemplate.put("http://localhost:8080/eprojectk/tvShow/updateTvShow", tvShowDto, TvShowDto.class);
+        } catch (HttpClientErrorException e) {
+            LOGGER.warn("User out of bounds! " + e);
+        }
     }
 
     public void deleteAllTvShows() throws HttpServerErrorException {

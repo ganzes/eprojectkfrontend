@@ -12,7 +12,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import lombok.Getter;
 
+@Getter
 public class MotiveForm extends FormLayout {
 
     private MotiveView motiveView;
@@ -43,6 +45,8 @@ public class MotiveForm extends FormLayout {
 
     public MotiveForm(MotiveView motiveView) {
         this.motiveView = motiveView;
+
+        updateMotive.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(buttonFactoryAdd, deleteMotive, updateMotive, deleteAllMotives);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMotiveByAuthor, findMotiveByRating, buttonCountAllMotives);
