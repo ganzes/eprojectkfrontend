@@ -42,6 +42,7 @@ public class TvShowForm extends FormLayout {
         this.tvShowView = tvShowView;
 
         updateTvShow.setEnabled(false);
+        deleteTvShow.setEnabled(false);
 
         binder.bindInstanceFields(this);
         binder.setBean(tvShowDto);

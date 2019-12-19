@@ -42,6 +42,7 @@ public class BookForm extends FormLayout {
         this.bookView = bookView;
 
         updateBook.setEnabled(false);
+        deleteBook.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(saveBook, deleteBook, updateBook, deleteAllBooks);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findBookByAuthor, findBookByRating, buttonCountAllBooks);

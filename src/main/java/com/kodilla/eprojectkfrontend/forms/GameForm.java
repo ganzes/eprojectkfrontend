@@ -42,6 +42,7 @@ public class GameForm extends FormLayout {
         this.gameView = gameView;
 
         updateGame.setEnabled(false);
+        deleteGame.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(saveGame, deleteGame, updateGame, deleteAllGames);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findGameByDeveloper, findGameByRating, buttonCountAllGames);

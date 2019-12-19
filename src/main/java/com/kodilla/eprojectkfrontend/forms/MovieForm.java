@@ -42,6 +42,7 @@ public class MovieForm extends FormLayout {
         this.movieView = movieView;
 
         updateMovie.setEnabled(false);
+        deleteMovie.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(saveMovie, deleteMovie, updateMovie, deleteAllMovies);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMovieByDirector, findMovieByRating, buttonCountAllMovies);

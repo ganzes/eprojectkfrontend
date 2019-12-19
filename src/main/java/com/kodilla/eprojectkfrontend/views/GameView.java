@@ -110,5 +110,6 @@ public class GameView extends VerticalLayout {
     public void check(){
         gameForm.setGameDto(gridGameDto.asSingleSelect().getValue());
         gameForm.getUpdateGame().setEnabled(true);
+        gameForm.getDeleteGame().setEnabled(true);
     }
 }

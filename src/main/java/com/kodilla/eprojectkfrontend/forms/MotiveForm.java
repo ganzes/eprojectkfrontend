@@ -27,7 +27,6 @@ public class MotiveForm extends FormLayout {
 
     private NumberField countAllMotivesNumberField = new NumberField("Motives size");
 
-    // private Button saveMotive = new Button("Add");
     private Button deleteMotive = new Button("Delete");
     private Button updateMotive = new Button("Update");
     private Button deleteAllMotives = new Button("Delete All");
@@ -35,7 +34,6 @@ public class MotiveForm extends FormLayout {
     private Button findMotiveByRating = new Button("Find by Rating");
     private Button buttonFactoryAdd = buttonFactory.buttonFactory("Add", "Add");
     private Button buttonCountAllMotives = new Button("Check stored motives size");
-
 
     private Binder<MotiveDto> binder = new Binder<>(MotiveDto.class);
 
@@ -47,17 +45,16 @@ public class MotiveForm extends FormLayout {
         this.motiveView = motiveView;
 
         updateMotive.setEnabled(false);
+        deleteMotive.setEnabled(false);
 
         HorizontalLayout buttons = new HorizontalLayout(buttonFactoryAdd, deleteMotive, updateMotive, deleteAllMotives);
         HorizontalLayout buttonsSecondRow = new HorizontalLayout(findMotiveByAuthor, findMotiveByRating, buttonCountAllMotives);
 
-        //saveMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         deleteMotive.addThemeVariants(ButtonVariant.LUMO_ERROR);
         updateMotive.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         deleteAllMotives.addThemeVariants(ButtonVariant.LUMO_ERROR);
         findMotiveByAuthor.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         findMotiveByRating.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-        //buttonCountAllMotives.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         add(motiveText, motiveAuthor, motiveRating, buttons, buttonsSecondRow);
 
         countAllMotivesNumberField.setReadOnly(true);
@@ -74,7 +71,6 @@ public class MotiveForm extends FormLayout {
         findMotiveByRating.addClickListener(event -> findMotiveByRating());
         buttonCountAllMotives.addClickListener(event -> countAllMotivesNumberField.setValue(countAllMotives()));
 
-        //saveMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
         buttonFactoryAdd.addClickListener(event -> UI.getCurrent().getPage().reload());
         deleteMotive.addClickListener(event -> UI.getCurrent().getPage().reload());
         updateMotive.addClickListener(event -> UI.getCurrent().getPage().reload());

@@ -110,5 +110,6 @@ public class BookView extends VerticalLayout {
     public void check(){
         bookForm.setBookDto(gridBookDto.asSingleSelect().getValue());
         bookForm.getUpdateBook().setEnabled(true);
+        bookForm.getDeleteBook().setEnabled(true);
     }
 }

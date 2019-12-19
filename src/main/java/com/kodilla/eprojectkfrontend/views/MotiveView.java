@@ -113,5 +113,6 @@ public class MotiveView extends VerticalLayout {
     public void check(){
         motiveForm.setMotiveDto(gridMotiveDto.asSingleSelect().getValue());
         motiveForm.getUpdateMotive().setEnabled(true);
+        motiveForm.getDeleteMotive().setEnabled(true);
     }
 }

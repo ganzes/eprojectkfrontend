@@ -111,5 +111,6 @@ public class MovieView extends VerticalLayout {
     public void check() {
         movieForm.setMovieDto(gridMovieDto.asSingleSelect().getValue());
         movieForm.getUpdateMovie().setEnabled(true);
+        movieForm.getDeleteMovie().setEnabled(true);
     }
 }

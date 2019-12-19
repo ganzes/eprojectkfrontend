@@ -111,5 +111,6 @@ public class TvShowView extends VerticalLayout {
     public void check(){
         tvShowForm.setTvShowDto(gridTvShowDto.asSingleSelect().getValue());
         tvShowForm.getUpdateTvShow().setEnabled(true);
+        tvShowForm.getDeleteTvShow().setEnabled(true);
     }
 }
