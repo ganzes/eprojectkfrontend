@@ -30,5 +30,4 @@ public class MovieDto {
 
     @JsonProperty("movieCreated")
     private LocalDate movieCreated;
-
 }

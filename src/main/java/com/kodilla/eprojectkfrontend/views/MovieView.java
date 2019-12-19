@@ -32,7 +32,6 @@ public class MovieView extends VerticalLayout {
     private Label gridMovieDtoLabel = new Label("Main view from Movies");
     private Label gridSearchResultLabel = new Label("Search results from Movies");
 
-
     private TextArea tutorialMovies = new TextArea();
 
     public Grid<MovieDto> getGridMovieDto() {

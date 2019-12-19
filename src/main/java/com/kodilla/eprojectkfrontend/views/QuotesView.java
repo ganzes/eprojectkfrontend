@@ -1,7 +1,6 @@
 package com.kodilla.eprojectkfrontend.views;
 
 import com.kodilla.eprojectkfrontend.forms.QuotesForm;
-import com.kodilla.eprojectkfrontend.services.QuotesService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;

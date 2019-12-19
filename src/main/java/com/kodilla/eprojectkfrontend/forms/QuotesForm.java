@@ -76,8 +76,3 @@ public class QuotesForm extends FormLayout {
         return quotesService.getRandomQuote().toString();
     }
 }
-/*
-    public void setQuotesDto(QuotesDto quotesDto) {
-        binder.setBean(quotesDto);
-    }
-}*/

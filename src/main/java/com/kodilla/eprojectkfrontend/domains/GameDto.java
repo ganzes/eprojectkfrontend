@@ -30,5 +30,4 @@ public class GameDto {
 
     @JsonProperty("gameCreated")
     private LocalDate gameCreated;
-
 }
