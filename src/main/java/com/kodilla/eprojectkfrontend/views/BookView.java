@@ -80,7 +80,7 @@ public class BookView extends VerticalLayout {
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
         tutorialBooks.setReadOnly(true);
-        tutorialBooks.setValue("Add your favourite books, and rate them! When in doubt, refresh page!");
+        tutorialBooks.setValue("Add your favourite books, and rate them! Or add empty row. When in doubt, refresh page!");
         tutorialBooks.setAutofocus(true);
         tutorialBooks.setWidthFull();
 

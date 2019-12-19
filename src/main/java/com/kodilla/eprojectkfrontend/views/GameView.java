@@ -80,7 +80,7 @@ public class GameView extends VerticalLayout {
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
         tutorialGames.setReadOnly(true);
-        tutorialGames.setValue("Add your favourite games, and rate them! When in doubt, refresh page!");
+        tutorialGames.setValue("Add your favourite games, and rate them! Or add empty row. When in doubt, refresh page!");
         tutorialGames.setAutofocus(true);
         tutorialGames.setWidthFull();
 

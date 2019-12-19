@@ -80,7 +80,7 @@ public class MovieView extends VerticalLayout {
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
         tutorialMovies.setReadOnly(true);
-        tutorialMovies.setValue("Add your favourite movies, and rate them! When in doubt, refresh page!");
+        tutorialMovies.setValue("Add your favourite movies, and rate them! Or add empty row. When in doubt, refresh page!");
         tutorialMovies.setAutofocus(true);
         tutorialMovies.setWidthFull();
 

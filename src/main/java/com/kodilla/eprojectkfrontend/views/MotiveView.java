@@ -79,7 +79,7 @@ public class MotiveView extends VerticalLayout {
         goToTvShowView.addClickListener(event -> goToTvShowView.getUI().ifPresent(ui -> ui.navigate("tvShowView")));
 
         tutorialMotives.setReadOnly(true);
-        tutorialMotives.setValue("Add motivational quotes from your favourite authors, and rate them!  When in doubt, refresh page!");
+        tutorialMotives.setValue("Add motivational quotes from your favourite authors, and rate them! Or add empty row. When in doubt, refresh page!");
         tutorialMotives.setAutofocus(true);
         tutorialMotives.setWidthFull();
 
