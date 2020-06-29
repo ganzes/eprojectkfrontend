@@ -33,7 +33,9 @@ public class BookService {
         try {
             URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/eprojectk/book/createBook")
                     .build().encode().toUri();
+
             restTemplate.postForObject(url, bookDto, BookDto.class);
+
         } catch (HttpClientErrorException e) {
             LOGGER.warn("User out of bounds! " + e);
         }
